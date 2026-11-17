@@ -1,0 +1,55 @@
+# ============================================================================
+# Local Agent Memory, Notes & Drafts (STRICTLY LOCAL - DO NOT COMMIT)
+# ============================================================================
+tmp/
+/tmp/
+*.local.md
+pap*/
+
+# ============================================================================
+# CMake & C++ Build Artifacts
+# ============================================================================
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+Makefile
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.exe
+solver_benchmark
+regression_tests
+
+# ============================================================================
+# LaTeX Intermediate Build Files
+# ============================================================================
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+missfont.log
+
+# ============================================================================
+# OS & Editor Files
+# ============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.vscode/
+.idea/
+*.swp
+*~
