@@ -1,0 +1,151 @@
+include/generative_dsl.hpp:262:34: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:262:34: optimized: loop vectorized using 16 byte vectors
+/usr/include/c++/13/bits/stl_algobase.h:930:22: optimized: loop vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_algobase.h:930:22: optimized: loop vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/charconv.h:106:15: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:155:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:155:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:155:30: optimized: loop vectorized using 16 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/vector.tcc:96:27: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_string.h:218:26: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_string.h:218:26: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_string.h:218:26: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_string.h:218:26: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/basic_ios.h:462:2: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/vector.tcc:521:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:232:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:232:30: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/vector.tcc:521:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:248:26: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:248:26: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/vector.tcc:521:30: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/random.tcc:412:42: optimized: loop vectorized using 32 byte vectors
+/usr/include/c++/13/bits/random.tcc:404:32: optimized: loop vectorized using 32 byte vectors
+/usr/include/c++/13/bits/random.tcc:404:32: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:248:26: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:248:26: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:83:26: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:83:26: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:155:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:155:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:160:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:160:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:160:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:155:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:155:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:155:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:83:26: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:83:26: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:160:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:160:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:160:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 32 byte vectors
+include/generative_dsl.hpp:165:30: optimized:  loop versioned for vectorization because of possible aliasing
+include/generative_dsl.hpp:165:30: optimized: loop vectorized using 16 byte vectors
+/usr/include/c++/13/bits/stl_algobase.h:930:22: optimized: loop vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_algobase.h:930:22: optimized: loop vectorized using 32 byte vectors
+include/solver_layouts.hpp:178:26: optimized: loop vectorized using 32 byte vectors
+include/solver_layouts.hpp:178:26: optimized: loop vectorized using 16 byte vectors
+include/solver_layouts.hpp:178:26: optimized: loop vectorized using 32 byte vectors
+include/solver_layouts.hpp:178:26: optimized: loop vectorized using 16 byte vectors
+src/benchmark_runner.cpp:58:77: optimized: basic block part vectorized using 32 byte vectors
+src/benchmark_runner.cpp:58:77: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:51:36: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_construct.h:119:7: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:280:37: optimized: basic block part vectorized using 32 byte vectors
+include/solver_layouts.hpp:280:37: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:232:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:232:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:232:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:232:30: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+include/generative_dsl.hpp:260:30: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:16: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:398:25: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:100:4: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:115:13: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:115:13: optimized: basic block part vectorized using 32 byte vectors
+/usr/include/c++/13/bits/stl_vector.h:115:13: optimized: basic block part vectorized using 32 byte vectors
