@@ -1,0 +1,471 @@
+In file included from src/benchmark_runner.cpp:2:
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:224:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  224 |                 acc += p_[idx] * m.viscosity + u_[idx] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:221:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  221 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:346:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+  346 |                 acc += tile.p[lane] * m.viscosity + tile.u[lane] * m.thermal_cond + static_cast<double>(m.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:341:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  341 |         for (size_t idx : indices) {
+      |         ^
+include/solver_layouts.hpp:97:21: remark: loop not vectorized: cannot prove it is safe to reorder floating-point operations; allow reordering by specifying '#pragma clang loop vectorize(enable)' before the loop or by providing the compiler option '-ffast-math'. [-Rpass-analysis=loop-vectorize]
+   97 |                 acc += c.p * c.viscosity + c.u * c.thermal_cond + static_cast<double>(c.material_id) * 1e-4;
+      |                     ^
+include/solver_layouts.hpp:94:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+   94 |         for (size_t idx : indices) {
+      |         ^
+In file included from src/benchmark_runner.cpp:2:
+In file included from include/solver_layouts.hpp:9:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/algorithm:61:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algo.h:65:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:204:24: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  204 |         { return this->operator()(__urng, _M_param); }
+      |                        ^
+src/benchmark_runner.cpp:117:9: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  117 |         for (auto& q : queries) q = dist(rng);
+      |         ^
+src/benchmark_runner.cpp:117:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:7:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/random:53:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/random.tcc:335:20: remark: loop not vectorized: value that could not be identified as reduction is used outside the loop [-Rpass-analysis=loop-vectorize]
+  335 |           _UIntType __x = _M_x[__i - 1];
+      |                           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/random.tcc:333:7: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  333 |       for (size_t __i = 1; __i < state_size; ++__i)
+      |       ^
+In file included from src/benchmark_runner.cpp:2:
+include/solver_layouts.hpp:197:18: remark: loop not vectorized: unsafe dependent memory operations in loop. Use #pragma clang loop distribute(enable) to allow loop distribution to attempt to isolate the offending operations into a separate loop
+Backward loop carried data dependence. Memory location is the same as accessed at include/solver_layouts.hpp:194:40 [-Rpass-analysis=loop-vectorize]
+  197 |             u[i] += dt * (-u[i] * du_dx - dp_dx + nu * d2u_dx2);
+      |                  ^
+include/solver_layouts.hpp:193:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  193 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:328:26: remark: loop not vectorized: cannot identify array bounds [-Rpass-analysis=loop-vectorize]
+  328 |             double u_c = tile.u[lane];
+      |                          ^
+include/solver_layouts.hpp:320:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  320 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:78:25: remark: loop not vectorized: unsafe dependent memory operations in loop. Use #pragma clang loop distribute(enable) to allow loop distribution to attempt to isolate the offending operations into a separate loop
+Backward loop carried data dependence. Memory location is the same as accessed at include/solver_layouts.hpp:75:61 [-Rpass-analysis=loop-vectorize]
+   78 |             cells_[i].u += dt * (-cells_[i].u * du_dx - dp_dx + nu * d2u_dx2);
+      |                         ^
+include/solver_layouts.hpp:74:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+   74 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:178:9: remark: vectorized loop (vectorization width: 4, interleaved count: 2) [-Rpass=loop-vectorize]
+  178 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:313:13: remark: loop not vectorized: cannot identify array bounds [-Rpass-analysis=loop-vectorize]
+  313 |             tile.p[lane] = tile.p_next[lane];
+      |             ^
+include/solver_layouts.hpp:310:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  310 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:308:13: remark: loop not vectorized: cannot identify array bounds [-Rpass-analysis=loop-vectorize]
+  308 |             tile.p_next[lane] = one_minus_omega * tile.p[lane] + omega * p_avg;
+      |             ^
+include/solver_layouts.hpp:302:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  302 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:67:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+   67 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:63:9: remark: the cost-model indicates that interleaving is not beneficial [-Rpass-analysis=loop-vectorize]
+   63 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:63:9: remark: vectorized loop (vectorization width: 4, interleaved count: 1) [-Rpass=loop-vectorize]
+include/solver_layouts.hpp:313:13: remark: loop not vectorized: cannot identify array bounds [-Rpass-analysis=loop-vectorize]
+  313 |             tile.p[lane] = tile.p_next[lane];
+      |             ^
+include/solver_layouts.hpp:310:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  310 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:308:13: remark: loop not vectorized: cannot identify array bounds [-Rpass-analysis=loop-vectorize]
+  308 |             tile.p_next[lane] = one_minus_omega * tile.p[lane] + omega * p_avg;
+      |             ^
+include/solver_layouts.hpp:302:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+  302 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:178:9: remark: vectorized loop (vectorization width: 4, interleaved count: 2) [-Rpass=loop-vectorize]
+  178 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:67:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+   67 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:63:9: remark: the cost-model indicates that interleaving is not beneficial [-Rpass-analysis=loop-vectorize]
+   63 |         for (size_t i = 1; i + 1 < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:63:9: remark: vectorized loop (vectorization width: 4, interleaved count: 1) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:83:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+   83 |         for (size_t i = 0; i < n; ++i) {
+      |         ^
+include/generative_dsl.hpp:155:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  155 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = a.data_[i] + b.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  165 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = alpha * a.data_[i];
+      |         ^
+include/generative_dsl.hpp:160:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  160 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = a.data_[i] - b.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  165 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = alpha * a.data_[i];
+      |         ^
+include/generative_dsl.hpp:155:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  155 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = a.data_[i] + b.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  165 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = alpha * a.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+include/generative_dsl.hpp:83:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+   83 |         for (size_t i = 0; i < n; ++i) {
+      |         ^
+include/generative_dsl.hpp:155:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  155 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = a.data_[i] + b.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  165 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = alpha * a.data_[i];
+      |         ^
+include/generative_dsl.hpp:160:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  160 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = a.data_[i] - b.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  165 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = alpha * a.data_[i];
+      |         ^
+include/generative_dsl.hpp:155:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  155 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = a.data_[i] + b.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  165 |         for (size_t i = 0; i < a.size(); ++i) res.data_[i] = alpha * a.data_[i];
+      |         ^
+include/generative_dsl.hpp:165:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:51:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  930 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:919:11: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  919 |         *__first = __value;
+      |                  ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized: instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  918 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  930 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:930:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+src/benchmark_runner.cpp:215:9: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  215 |         parallel_jacobi_aos(par_aos, 0.01, 0.8, th);
+      |         ^
+src/benchmark_runner.cpp:218:19: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  218 |         auto t0 = Clock::now();
+      |                   ^
+src/benchmark_runner.cpp:213:5: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  213 |     for (int th : thread_counts) {
+      |     ^
+src/benchmark_runner.cpp:213:5: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:18:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/fstream:40:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/istream:40:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ios:46:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/basic_ios.h:37:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/locale_facets.h:884:8: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  884 |         this->_M_widen_init();
+      |               ^
+In file included from src/benchmark_runner.cpp:1:
+include/platform_hw_probe.hpp:216:9: remark: loop not vectorized: value that could not be identified as reduction is used outside the loop [-Rpass-analysis=loop-vectorize]
+  216 |         while (std::getline(cpuinfo, line)) {
+      |         ^
+include/platform_hw_probe.hpp:216:9: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+include/platform_hw_probe.hpp:216:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:51:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:919:11: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  919 |         *__first = __value;
+      |                  ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized: instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  918 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:2:
+include/solver_layouts.hpp:40:9: remark: loop not vectorized: value that could not be identified as reduction is used outside the loop [-Rpass-analysis=loop-vectorize]
+   40 |         for (size_t i = 0; i < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:40:9: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+include/solver_layouts.hpp:40:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:51:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:919:11: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  919 |         *__first = __value;
+      |                  ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized: instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  918 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:2:
+include/solver_layouts.hpp:142:27: remark: loop not vectorized: library call cannot be vectorized. Try compiling with -fno-math-errno, -ffast-math, or similar flags [-Rpass-analysis=loop-vectorize]
+  142 |             u_[i] = 0.1 * std::sin(static_cast<double>(i) * 0.001);
+      |                           ^
+include/solver_layouts.hpp:141:9: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  141 |         for (size_t i = 0; i < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:141:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:51:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:919:11: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  919 |         *__first = __value;
+      |                  ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized: instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  918 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:919:11: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  919 |         *__first = __value;
+      |                  ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized: instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  918 |       for (; __first != __last; ++__first)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h:918:7: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:2:
+include/solver_layouts.hpp:274:39: remark: loop not vectorized: library call cannot be vectorized. Try compiling with -fno-math-errno, -ffast-math, or similar flags [-Rpass-analysis=loop-vectorize]
+  274 |             tiles_[t].u[lane] = 0.1 * std::sin(static_cast<double>(i) * 0.001);
+      |                                       ^
+include/solver_layouts.hpp:271:9: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  271 |         for (size_t i = 0; i < n_; ++i) {
+      |         ^
+include/solver_layouts.hpp:271:9: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:17:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/thread:45:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/std_thread.h:164:29: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  164 |         _M_start_thread(_State_ptr(new _State_impl<_Wrapper>(
+      |                                    ^
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:58:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/memory_resource.h:47:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/tuple:201:4: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  201 |         : _M_head_impl(std::forward<_UHead>(__h)) { }
+      |           ^
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:229:5: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  229 |     for (int t = 0; t < num_threads; ++t) {
+      |     ^
+include/generative_dsl.hpp:229:5: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+include/generative_dsl.hpp:239:33: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  239 |     for (auto& th : threads) th.join();
+      |                                 ^
+include/generative_dsl.hpp:239:5: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  239 |     for (auto& th : threads) th.join();
+      |     ^
+include/generative_dsl.hpp:239:5: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:54:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/basic_string.h:39:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ext/alloc_traits.h:34:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/alloc_traits.h:33:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_construct.h:162:4: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  162 |           for (; __first != __last; ++__first)
+      |           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_construct.h:162:4: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:220:9: remark: the cost-model indicates that interleaving is not beneficial [-Rpass-analysis=loop-vectorize]
+  220 |         for (size_t i = 1; i + 1 < n; ++i) {
+      |         ^
+include/generative_dsl.hpp:220:9: remark: vectorized loop (vectorization width: 4, interleaved count: 1) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:17:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/thread:45:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/std_thread.h:164:29: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  164 |         _M_start_thread(_State_ptr(new _State_impl<_Wrapper>(
+      |                                    ^
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:58:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/memory_resource.h:47:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/tuple:201:4: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  201 |         : _M_head_impl(std::forward<_UHead>(__h)) { }
+      |           ^
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:257:5: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  257 |     for (int t = 0; t < num_threads; ++t) {
+      |     ^
+include/generative_dsl.hpp:257:5: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+include/generative_dsl.hpp:268:33: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  268 |     for (auto& th : threads) th.join();
+      |                                 ^
+include/generative_dsl.hpp:268:5: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  268 |     for (auto& th : threads) th.join();
+      |     ^
+include/generative_dsl.hpp:268:5: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:54:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/basic_string.h:39:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ext/alloc_traits.h:34:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/alloc_traits.h:33:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_construct.h:162:4: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  162 |           for (; __first != __last; ++__first)
+      |           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_construct.h:162:4: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:248:9: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  248 |         for (size_t i = 1; i + 1 < n; ++i) {
+      |         ^
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:18:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/fstream:40:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/istream:40:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ios:46:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/basic_ios.h:37:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/locale_facets.h:884:8: remark: loop not vectorized: loop contains a switch statement [-Rpass-analysis=loop-vectorize]
+  884 |         this->_M_widen_init();
+      |               ^
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:54:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/basic_string.h:2781:15: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+ 2781 |         return this->rfind(__s, __pos, traits_type::length(__s));
+      |                      ^
+In file included from src/benchmark_runner.cpp:1:
+include/platform_hw_probe.hpp:90:5: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+   90 |     while (std::getline(os_rel, line)) {
+      |     ^
+include/platform_hw_probe.hpp:90:5: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:1:
+In file included from include/platform_hw_probe.hpp:14:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/string:54:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/basic_string.h:39:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ext/alloc_traits.h:34:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/alloc_traits.h:33:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_construct.h:162:4: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  162 |           for (; __first != __last; ++__first)
+      |           ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_construct.h:162:4: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:2:
+In file included from include/solver_layouts.hpp:4:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/vector:65:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_uninitialized.h:1104:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+ 1104 |       for (; __first != __last; ++__first, (void)++__cur)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_uninitialized.h:1104:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:233:13: remark: the cost-model indicates that interleaving is not beneficial [-Rpass-analysis=loop-vectorize]
+  233 |             for (size_t i = start; i < end; ++i) {
+      |             ^
+include/generative_dsl.hpp:233:13: remark: vectorized loop (vectorization width: 4, interleaved count: 1) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:2:
+In file included from include/solver_layouts.hpp:4:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/vector:65:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_uninitialized.h:1104:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+ 1104 |       for (; __first != __last; ++__first, (void)++__cur)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_uninitialized.h:1104:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:3:
+include/generative_dsl.hpp:262:13: remark: the cost-model indicates that interleaving is not beneficial [-Rpass-analysis=loop-vectorize]
+  262 |             for (size_t i = start; i < end; ++i) {
+      |             ^
+include/generative_dsl.hpp:262:13: remark: vectorized loop (vectorization width: 4, interleaved count: 1) [-Rpass=loop-vectorize]
+In file included from src/benchmark_runner.cpp:2:
+In file included from include/solver_layouts.hpp:9:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/algorithm:61:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algo.h:65:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:363:27: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  363 |                 __tmp = (__uerngrange * operator()
+      |                                         ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:360:6: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  360 |             do
+      |             ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:360:6: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:276:21: remark: loop not vectorized: call instruction cannot be vectorized [-Rpass-analysis=loop-vectorize]
+  276 |                   __product = _Wp(__g()) * _Wp(__range);
+      |                                   ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:274:8: remark: loop not vectorized: could not determine number of loop iterations [-Rpass-analysis=loop-vectorize]
+  274 |               while (__low < __threshold)
+      |               ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uniform_int_dist.h:274:8: remark: loop not vectorized [-Rpass-missed=loop-vectorize]
+In file included from src/benchmark_runner.cpp:7:
+In file included from /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/random:53:
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/random.tcc:404:7: remark: vectorized loop (vectorization width: 4, interleaved count: 4) [-Rpass=loop-vectorize]
+  404 |       for (size_t __k = 0; __k < (__n - __m); ++__k)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/random.tcc:412:7: remark: the cost-model indicates that interleaving is not beneficial [-Rpass-analysis=loop-vectorize]
+  412 |       for (size_t __k = (__n - __m); __k < (__n - 1); ++__k)
+      |       ^
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/random.tcc:412:7: remark: vectorized loop (vectorization width: 2, interleaved count: 1) [-Rpass=loop-vectorize]
