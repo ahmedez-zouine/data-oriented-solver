@@ -1,10 +1,10 @@
 {
   "os_name": "Linux (Ubuntu 24.04.5 LTS)",
   "cpu_arch": "x86_64 (AMD64)",
-  "cpu_brand": "Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz",
+  "cpu_brand": "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz",
   "compiler_name": "GNU GCC 13.3.0",
-  "simd_isa": "x86_64 AVX-512F",
-  "simd_width_bits": 512,
+  "simd_isa": "x86_64 AVX2 + FMA",
+  "simd_width_bits": 256,
   "cache_line_bytes": 64,
   "l1d_cache_bytes": 32768,
   "l2_cache_bytes": 1048576,
