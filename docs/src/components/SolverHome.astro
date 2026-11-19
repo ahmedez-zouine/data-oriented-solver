@@ -1,0 +1,64 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const point = (x: number, y: number) => [210 + (x-y)*21, 35 + (x+y)*10];
+const cells = Array.from({length: 49}, (_, i) => {
+  const x = i % 7, y = Math.floor(i / 7);
+  const distance = Math.abs(x-3) + Math.abs(y-3);
+  return { points: [[x,y],[x+1,y],[x+1,y+1],[x,y+1]].map(([a,b])=>point(a,b).join(',')).join(' '), distance };
+});
+const chapters = [
+  { title:'Choose a layout', path:'layouts/overview', detail:'Pressure stride, hot fields and tile width.' },
+  { title:'Write a field expression', path:'abstractions/edsl', detail:'Loop fusion and dimensional arithmetic.' },
+  { title:'Call a solver', path:'api/solvers', detail:'Jacobi kernels, line solvers and boundaries.' },
+];
+const plots = [
+  { id:'query', title:'Random queries', unit:'Batch time · lower is faster', axis:'0 to 2.5 ms', limit:2.5, rows:[['AoS',1.40],['AoSoA',2.10],['SoA',2.33]], suffix:' ms', note:'50,000 scattered lookups, Intel Xeon.', path:'performance/trade-offs' },
+  { id:'sweep', title:'Jacobi sweep', unit:'Speedup over AoS · higher is faster', axis:'0 to 7×', limit:7, rows:[['SoA · Clang AVX-512',6.11],['SoA · GCC AVX-512',5.29],['SoA · GCC SSE4.2',5.06]], suffix:'×', note:'Streaming pressure update, Intel Xeon.', path:'performance/multi-arch' }
+];
+---
+<div class="atlas not-content">
+  <section class="intro">
+    <div>
+      <p class="meta">C++17 / Scientific computing</p>
+      <h1>Data-Oriented<br/>Solver<span>.</span></h1>
+      <p class="deck">A C++ framework for studying how grid storage changes stencil performance. Build a solver, compare three layouts, and measure your hardware.</p>
+      <div class="actions"><a class="start" href={base+'/getting-started/build/'}>Build the solver <span aria-hidden="true">↗</span></a><a href={base+'/api/layouts/'}>API reference →</a></div>
+    </div>
+    <figure class="plate">
+      <figcaption><span>2D Jacobi stencil</span><span>5-point update</span></figcaption>
+      <svg viewBox="0 0 420 215" role="img" aria-label="Four blue neighbors around one orange center on a seven by seven isometric grid">
+        <path d="M63 105v9l147 70 147-70v-9l-147 70z" fill="#7385a4"/>
+        {cells.map(({points,distance})=><polygon {points} fill={distance===0?'#ef7648':distance===1?'#345bdd':'#d4dff4'} stroke="#7486a4" stroke-width="0.85"/>)}
+        <path d="M210 103V22h76" stroke="#243457" stroke-width="1.3" fill="none"/>
+        <circle cx="210" cy="105" r="3" fill="#243457"/>
+        <text x="290" y="25" font-size="12" fill="#243457" font-family="monospace">p[i,j]</text>
+      </svg>
+      <div class="legend"><span><i class="neighbor"></i> Read neighbor</span><span><i class="center"></i> Update center</span></div>
+    </figure>
+  </section>
+  <div class="lower">
+    <section class="guide"><h2>Implementation guide</h2>
+      {chapters.map(c=><a class="guide-link" href={base+'/'+c.path+'/'}><strong>{c.title}</strong><span>{c.detail}</span><b aria-hidden="true">↗</b></a>)}
+    </section>
+    <section class="bench"><div class="bench-head"><h2>Benchmark notebook</h2><span>4,194,304 cells</span></div>
+      <div class="switch" role="group" aria-label="Benchmark workload">{plots.map((p,i)=><button type="button" data-workload={p.id} aria-pressed={i===0} aria-controls={'plot-'+p.id}>{p.title}</button>)}</div>
+      {plots.map((p,i)=><div class="measures" id={'plot-'+p.id} hidden={i!==0}>
+        <div class="units">{p.unit}<span>{p.axis}</span></div>
+        {p.rows.map(([label,n])=><div class="bar-row"><span>{label}</span><div class="track"><i style={'width:'+(Number(n)/p.limit*100)+'%'}></i></div><b>{Number(n).toFixed(2)}{p.suffix}</b></div>)}
+        <p>{p.note} <a href={base+'/'+p.path+'/'}>See full plot →</a></p>
+      </div>)}
+    </section>
+  </div>
+  <footer>Maintained by <a href="mailto:ahmed.ezzouine@um5r.ac.ma">Ahmed EZ-ZOUINE</a><span>MIT License</span></footer>
+</div>
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-workload]')) {
+    button.addEventListener('click', () => {
+      for (const option of document.querySelectorAll<HTMLButtonElement>('[data-workload]')) {
+        const selected = option === button;
+        option.setAttribute('aria-pressed', String(selected));
+        document.getElementById('plot-' + option.dataset.workload)!.hidden = !selected;
+      }
+    });
+  }
+</script>

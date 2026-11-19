@@ -21,7 +21,7 @@ ctest --test-dir build/public-api --no-tests=error --output-on-failure
 
 ## Documentation deployment
 
-The [Pages workflow](workflows/docs.yml) builds and deploys the documentation on changes to the site, its figure assets, build tools or workflow on `Master`. Use Node.js 22 and run `npm ci` from the repository root. Start the development server with `npm run docs:dev`. Run `npm run docs:build` and `npm run docs:preview` to inspect the production site at the Pages subpath.
+The [Pages workflow](workflows/docs.yml) builds and deploys the documentation on changes to the site, its figure assets, build tools or workflow on `Master`. Use Node.js 24 and run `npm ci` from the repository root. Start the development server with `npm run docs:dev`. Run `npm run docs:build` and `npm run docs:preview` to inspect the production site at the Pages subpath.
 
 ## Read a test result
 

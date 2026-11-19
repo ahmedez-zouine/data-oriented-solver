@@ -2,14 +2,23 @@
   "name": "data-oriented-solver-docs",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
-    "docs:dev": "node tools/docs/assets.mjs && vitepress dev docs",
-    "docs:build": "node tools/docs/assets.mjs && vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:dev": "node tools/docs/assets.mjs && astro dev --root docs",
+    "docs:build": "node tools/docs/assets.mjs && astro build --root docs",
+    "docs:preview": "astro preview --root docs"
   },
   "devDependencies": {
-    "markdown-it-mathjax3": "4.3.2",
-    "vitepress": "1.6.4",
-    "vue": "3.5.45"
+    "@astrojs/markdown-remark": "7.3.10",
+    "@astrojs/starlight": "0.43.1",
+    "astro": "7.4.13",
+    "katex": "0.19.1",
+    "rehype-katex": "7.0.1",
+    "remark-math": "6.0.0"
+  },
+  "overrides": {
+    "katex": "$katex"
   }
 }

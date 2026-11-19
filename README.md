@@ -19,7 +19,7 @@ Select a badge to open its workflow runs. The badges show the status of `Master`
 | [![Sanitizers](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml?query=branch%3AMaster) | Address and undefined behavior checks with Ubuntu Clang. |
 | [![C++17 public API](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml?query=branch%3AMaster) | Each public header compiles on its own. A separate CMake application links the solver and runs a Jacobi step. |
 | [![Benchmark smoke checks](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml?query=branch%3AMaster) | A quick run writes 4 result tables and a hardware profile. |
-| [![Documentation](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml?query=branch%3AMaster) | Builds the VitePress documentation and checks internal page links and deploys it to GitHub Pages. |
+| [![Documentation](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml?query=branch%3AMaster) | Builds the Astro Starlight documentation and its search index and deploys it to GitHub Pages. |
 
 ## Key Features
 
