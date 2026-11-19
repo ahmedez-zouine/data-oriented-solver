@@ -7,6 +7,8 @@ A high-performance C++17 scientific computing and benchmarking framework designe
 
 ---
 
+[Read the documentation](https://ahmedez-zouine.github.io/data-oriented-solver/) for build instructions, layout diagrams, benchmark plots and the C++ API.
+
 ## Continuous integration
 
 Select a badge to open its workflow runs. The badges show the status of `Master`.
@@ -17,6 +19,7 @@ Select a badge to open its workflow runs. The badges show the status of `Master`
 | [![Sanitizers](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml?query=branch%3AMaster) | Address and undefined behavior checks with Ubuntu Clang. |
 | [![C++17 public API](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml?query=branch%3AMaster) | Each public header compiles on its own. A separate CMake application links the solver and runs a Jacobi step. |
 | [![Benchmark smoke checks](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml?query=branch%3AMaster) | A quick run writes 4 result tables and a hardware profile. |
+| [![Documentation](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml?query=branch%3AMaster) | Builds the documentation in strict mode and deploys it to GitHub Pages. |
 
 ## Key Features
 

@@ -56,3 +56,6 @@ missfont.log
 .idea/
 *.swp
 *~
+
+# Python documentation hooks
+__pycache__/

@@ -19,6 +19,10 @@ cmake --build build/public-api --parallel
 ctest --test-dir build/public-api --no-tests=error --output-on-failure
 ```
 
+## Documentation deployment
+
+The [Pages workflow](workflows/docs.yml) builds and deploys the documentation on changes to the site, its figure assets, build tools or workflow on `Master`. To preview locally, install `tools/docs/requirements.txt` in a virtual environment and run `mkdocs serve` from the repository root. Run `mkdocs build --strict` to produce the same static artifact as CI.
+
 ## Read a test result
 
 The job summary counts passes in 2 groups. The first contains `RegressionTest_1` through `RegressionTest_32`. The second contains 4 focused tests.
