@@ -62,9 +62,5 @@ __pycache__/
 
 # Generated documentation
 /site/
-
-# Astro build inputs and generated assets
-/node_modules/
-/docs/.astro/
-/docs/node_modules/
-/docs/public/assets/
+/docs/assets/fig*.png
+/docs/assets/fig*.pdf

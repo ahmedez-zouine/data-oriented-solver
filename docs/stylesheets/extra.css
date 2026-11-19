@@ -1,0 +1,302 @@
+/* ============================================================================
+   Data-Oriented Solver — Custom Material for MkDocs Design System
+   Typography: Plus Jakarta Sans + JetBrains Mono
+   Palette: Deep Ocean Navy (#1b4965) + Electric Cyan (#0ea5e9) + Warm Amber (#f59e0b)
+   ============================================================================ */
+
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #133b5c;
+  --md-primary-fg-color--light: #1e5f8a;
+  --md-primary-fg-color--dark: #0c263d;
+  --md-accent-fg-color: #0284c7;
+  --md-accent-fg-color--transparent: rgba(2, 132, 199, 0.12);
+
+  --dos-surface: #ffffff;
+  --dos-surface-subtle: #f8fafc;
+  --dos-border: #e2e8f0;
+  --dos-hero-bg: linear-gradient(135deg, #0f2942 0%, #1b4965 55%, #134e6f 100%);
+  --dos-hero-text: #f8fafc;
+  --dos-hero-muted: #cbd5e1;
+  --dos-card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+  --dos-card-hover-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.12);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0f172a;
+  --md-primary-fg-color--light: #1e293b;
+  --md-primary-fg-color--dark: #090e1a;
+  --md-accent-fg-color: #38bdf8;
+  --md-accent-fg-color--transparent: rgba(56, 189, 248, 0.14);
+  --md-default-bg-color: #0b1120;
+  --md-code-bg-color: #111827;
+
+  --dos-surface: #111827;
+  --dos-surface-subtle: #162032;
+  --dos-border: #1e293b;
+  --dos-hero-bg: linear-gradient(135deg, #0f172a 0%, #132c47 55%, #0c354c 100%);
+  --dos-hero-text: #f8fafc;
+  --dos-hero-muted: #94a3b8;
+  --dos-card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+  --dos-card-hover-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.55);
+}
+
+/* Typography refinements */
+.md-typeset {
+  font-size: 0.84rem;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+}
+
+.md-typeset h1 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.md-typeset h2 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--dos-border);
+}
+
+.md-typeset h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset code {
+  font-feature-settings: "liga" 1, "calt" 1;
+  border-radius: 0.3rem;
+}
+
+.md-typeset pre > code {
+  border-radius: 0.55rem;
+  font-size: 0.78rem;
+}
+
+/* Header & tabs polish */
+.md-header {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.md-tabs {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.md-tabs__link {
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.01em;
+}
+
+/* Hero Banner on Home Page */
+.dos-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  padding: 2.5rem 2.2rem;
+  margin: 0.25rem 0 2rem 0;
+  background: var(--dos-hero-bg);
+  color: var(--dos-hero-text);
+  box-shadow: 0 18px 40px -12px rgba(15, 41, 66, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dos-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.dos-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.dos-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.1rem;
+}
+
+.dos-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+}
+
+.dos-hero h1 {
+  color: #ffffff !important;
+  font-size: 2.1rem;
+  line-height: 1.18;
+  margin: 0 0 0.75rem 0 !important;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.dos-hero p {
+  color: var(--dos-hero-muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  max-width: 44rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.dos-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dos-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: #38bdf8;
+  color: #0b1120 !important;
+  text-decoration: none !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.dos-btn-primary:hover {
+  background: #7dd3fc;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(56, 189, 248, 0.35);
+}
+
+.dos-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  text-decoration: none !important;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.dos-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+/* KPI Metric Strip */
+.dos-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.9rem;
+  margin: 0 0 2rem 0;
+}
+
+.dos-metric-card {
+  background: var(--dos-surface);
+  border: 1px solid var(--dos-border);
+  border-radius: 0.75rem;
+  padding: 1.05rem 1.15rem;
+  box-shadow: var(--dos-card-shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.dos-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dos-card-hover-shadow);
+  border-color: var(--md-accent-fg-color);
+}
+
+.dos-metric-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--md-accent-fg-color);
+  line-height: 1.15;
+}
+
+.dos-metric-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+  opacity: 0.82;
+}
+
+/* Material Grid Cards polish */
+.md-typeset .grid.cards > ul > li {
+  border-radius: 0.75rem;
+  border: 1px solid var(--dos-border);
+  background: var(--dos-surface);
+  box-shadow: var(--dos-card-shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dos-card-hover-shadow);
+  border-color: var(--md-accent-fg-color);
+}
+
+/* Scientific Figure Frame (stays crisp in both Light & Dark modes) */
+.dos-figure-frame {
+  background: #ffffff;
+  border: 1px solid var(--dos-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 1.25rem 0;
+  box-shadow: var(--dos-card-shadow);
+  text-align: center;
+}
+
+.dos-figure-frame img {
+  border-radius: 0.35rem;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.dos-figure-caption {
+  margin-top: 0.65rem;
+  font-size: 0.74rem;
+  color: #475569;
+}
+
+.dos-figure-caption a {
+  color: #0284c7;
+  font-weight: 600;
+}
+
+/* Tables polish */
+.md-typeset table:not([class]) {
+  border-radius: 0.6rem;
+  overflow: hidden;
+  border: 1px solid var(--dos-border);
+  box-shadow: var(--dos-card-shadow);
+}
+
+.md-typeset table:not([class]) th {
+  font-weight: 700;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}

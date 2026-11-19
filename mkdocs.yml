@@ -1,0 +1,130 @@
+site_name: Data-Oriented Solver
+site_description: High-performance C++17 scientific solver evaluating AoS, SoA, and tiled AoSoA layouts, expression template loop fusion, and compile-time SI units.
+site_author: Ahmed EZ-ZOUINE
+site_url: https://ahmedez-zouine.github.io/data-oriented-solver/
+repo_name: ahmedez-zouine/data-oriented-solver
+repo_url: https://github.com/ahmedez-zouine/data-oriented-solver
+edit_uri: ""
+
+hooks:
+  - tools/docs/sync_assets.py
+
+theme:
+  name: material
+  language: en
+  logo: assets/favicon.svg
+  favicon: assets/favicon.svg
+  font:
+    text: Plus Jakarta Sans
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ahmedez-zouine/data-oriented-solver
+      name: GitHub Repository
+  generator: false
+
+copyright: Copyright &copy; 2026 Ahmed EZ-ZOUINE &middot; MIT License
+
+nav:
+  - Overview: index.md
+  - Getting Started:
+      - Prerequisites & Build: getting-started/build.md
+      - Tests & Benchmarks: getting-started/benchmarks.md
+  - Memory Layouts:
+      - Layout Architecture: layouts/overview.md
+      - Array of Structures (AoS): layouts/aos.md
+      - Structure of Arrays (SoA): layouts/soa.md
+      - Tiled Hybrid (AoSoA): layouts/aosoa.md
+  - Abstractions:
+      - Expression Template eDSL: abstractions/edsl.md
+      - Compile-Time SI Units: abstractions/units.md
+  - Benchmarks:
+      - Multi-Arch Scaling: performance/multi-arch.md
+      - Locality Trade-Offs: performance/trade-offs.md
+  - API Reference:
+      - Core & Layouts: api/layouts.md
+      - Solvers & Stencils: api/solvers.md
