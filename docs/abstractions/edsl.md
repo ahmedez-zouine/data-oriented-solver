@@ -1,4 +1,4 @@
-# Language abstractions
+# Expression template eDSL
 
 ## Evaluate fields in one pass
 
@@ -21,18 +21,9 @@ Here the fields allocate their buffers at construction. The fused assignment nee
 !!! note "Field lifetime and overlap"
     Keep each source alive until assignment finishes. Field extents must agree. For shifted, overlapping slices, write to a separate destination so that an earlier store cannot overwrite a later input.
 
-## Check SI dimensions
 
-`Quantity<M,L,T>` stores one double and encodes the mass, length and time exponents in its type. Multiplication adds exponents, division subtracts them, and addition requires matching quantities.
+## Temporary allocation volume
 
-```cpp
-#include <dos/core/units.hpp>
-#include <type_traits>
+The expression benchmark evaluates `0.5*u + 0.3*v - 0.1*p + 0.05*rhs`. With eager field operators, four multiplications and three additions or subtractions each produce a full-length buffer. With expression templates the tree stores operations and references. A single assignment loop evaluates its root at each index and stores the result.
 
-static_assert(std::is_same_v<decltype(dos::Length{6} / dos::Time{2}),
-                             dos::Velocity>);
-static_assert((dos::Length{6} / dos::Time{2}).value == 3.0);
-static_assert(sizeof(dos::Pressure) == sizeof(double));
-```
-
-For example, `Pressure` has exponents $(1,-1,-2)$. Adding a `Pressure` to a `Velocity` has no matching addition operator.
+At $N=4{,}194{,}304$, seven buffers of $8N$ bytes represent **234,881,024 B (224 MiB)** of cumulative temporary allocation per evaluation. This accounting sums allocations over the expression. Peak resident memory also depends on temporary lifetimes and allocator behavior.

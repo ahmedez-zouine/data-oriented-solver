@@ -1,8 +1,8 @@
-# Getting started
+# Prerequisites and build
 
 Use a C++17 compiler and CMake 3.20 or later for the commands below. The solver uses the standard library and the platform thread library.
 
-## Build and test
+## Configure a Release build
 
 ```sh
 git clone https://github.com/ahmedez-zouine/data-oriented-solver.git
@@ -52,13 +52,15 @@ Save the example as `sweep.cpp`. Four neighbors at pressure 2.0 give the single 
     target_link_libraries(sweep PRIVATE dos::solvers)
     ```
 
-## Run the benchmark harness
 
-From the repository root on Linux or macOS, run the executable in a separate output directory.
+## Preview these docs locally
+
+From the repository root, install the pinned documentation tools in an isolated Python 3.11 environment. Run the server in the foreground, then open the local URL printed by MkDocs (including the project path).
 
 ```sh
-mkdir -p build/results
-(cd build/results && ../solver_benchmark --suite all --quick)
+python3.11 -m venv build/docs-env
+. build/docs-env/bin/activate
+python -m pip install -r tools/docs/requirements.txt
+mkdocs build --strict
+mkdocs serve
 ```
-
-The quick suite starts with 4,096 cells. Remove `--quick` for all six sizes through 4,194,304 cells. On a Windows multi-configuration build, use `..\Release\solver_benchmark.exe` from `build\results`. See [benchmark outputs](benchmarks.md#run-a-single-suite) for the suite names.

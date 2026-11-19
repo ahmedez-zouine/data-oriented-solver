@@ -1,4 +1,4 @@
-name: Documentation
+name: Deploy Documentation
 
 on:
   push:
@@ -25,14 +25,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
           cache: pip
           cache-dependency-path: tools/docs/requirements.txt
       - run: python -m pip install -r tools/docs/requirements.txt
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: build/site
+          path: site
 
   deploy:
     if: github.ref == 'refs/heads/Master'

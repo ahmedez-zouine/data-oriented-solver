@@ -1,9 +1,11 @@
-# Data-Oriented Solver
+# Data-Oriented C++17 Scientific Solver
+
+<div class="project-tags" aria-label="Project and benchmark platforms"><span>C++17</span><a href="https://github.com/ahmedez-zouine/data-oriented-solver/blob/Master/LICENSE">MIT License</a><span>Linux · AVX-512</span><span>macOS · ARM64 NEON</span></div>
 
 Build C++17 stencil solvers with a choice of three grid layouts. Run the same pressure update against each layout to see how field order affects sequential sweeps and random cell queries.
 
-[Build your first solver](getting-started.md){ .md-button .md-button--primary }
-[Browse the API](api.md){ .md-button }
+[Build your first solver](getting-started/build.md){ .md-button .md-button--primary }
+[Browse the API](api/layouts.md){ .md-button }
 
 <figure class="layout-map">
 <figcaption>Follow the pressure field through memory</figcaption>
@@ -14,22 +16,22 @@ Build C++17 stencil solvers with a choice of three grid layouts. Run the same pr
 
 ## Choose a layout
 
-| Layout | Storage per cell | Access pattern to investigate |
-| --- | ---: | --- |
-| Array of structures (AoS) | 112 B | Read several properties from one cell |
-| Structure of arrays (SoA) | 88 B | Sweep a single field at 8 B intervals |
-| Tiled array of structures of arrays (AoSoA) | 72 B for full 8-cell tiles | Sweep 8 values together, then visit another field in the same tile |
+| Architecture | Storage organization | Bytes per cell | Hot working set per cell | Pressure contiguity |
+| --- | --- | ---: | --- | --- |
+| [AoS](layouts/aos.md) | One record per cell | 112 B | Five fields spread across a 112 B record | 112 B stride |
+| [SoA](layouts/soa.md) | Separate field arrays | 88 B | 40 B | 8 B stride |
+| [AoSoA](layouts/aosoa.md) | Groups of 8 cells | 72 B in full tiles | 40 B | 8 consecutive doubles per tile |
 
 <div class="grid cards" markdown>
 
-- **Store the grid**. Compare the record stride, the five hot arrays and the cost of a partial tile. [Memory layouts](layouts.md)
-- **Write the update**. Combine field references into one assignment or check SI dimensions at compile time. [Language abstractions](expressions.md)
-- **Measure the workload**. Compare Jacobi sweeps with batches of 50,000 random queries. [Benchmark results](benchmarks.md)
+- **Store the grid**. Compare the record stride, the five hot arrays and the cost of a partial tile. [Memory layouts](layouts/overview.md)
+- **Write the update**. Combine field references into one assignment or check SI dimensions at compile time. [Language abstractions](abstractions/edsl.md)
+- **Measure the workload**. Compare Jacobi sweeps with batches of 50,000 random queries. [Benchmark results](performance/multi-arch.md)
 
 </div>
 
 ## How a sweep works
 
-A layout owns the field storage. A boundary policy fills the outer halo, and a row kernel reads pressure from one time level and writes interior results to the next. The solver then copies the interior results back to pressure and refreshes the halo. [Stencil interfaces](api.md#stencil-interface)
+A layout owns the field storage. A boundary policy fills the outer halo, and a row kernel reads pressure from one time level and writes interior results to the next. The solver then copies the interior results back to pressure and refreshes the halo. [Stencil interfaces](api/solvers.md#stencil-interface)
 
 Maintained by [Ahmed EZ-ZOUINE](mailto:ahmed.ezzouine@um5r.ac.ma).

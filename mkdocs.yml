@@ -1,58 +1,91 @@
-site_name: Data-Oriented Solver
-site_description: C++17 grid layouts, stencil kernels and field expressions.
+site_name: Data-Oriented C++17 Scientific Solver
+site_description: High-Performance Data-Oriented Design, Expression eDSL, and SIMD Vectorization Framework
 site_author: Ahmed EZ-ZOUINE
 site_url: https://ahmedez-zouine.github.io/data-oriented-solver/
-repo_url: https://github.com/ahmedez-zouine/data-oriented-solver
 repo_name: ahmedez-zouine/data-oriented-solver
-site_dir: build/site
+repo_url: https://github.com/ahmedez-zouine/data-oriented-solver
+edit_uri: ""
 theme:
   name: material
-  font: false
+  language: en
   icon:
     logo: material/grid
-  features:
-    - navigation.sections
-    - navigation.footer
-    - content.code.copy
-    - search.highlight
+  font:
+    text: Roboto
+    code: JetBrains Mono
   palette:
     - scheme: default
-      primary: custom
-      accent: teal
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/weather-night
+        icon: material/brightness-7
         name: Switch to dark mode
     - scheme: slate
-      primary: custom
-      accent: teal
+      primary: indigo
+      accent: indigo
       toggle:
-        icon: material/weather-sunny
+        icon: material/brightness-4
         name: Switch to light mode
-nav:
-  - Overview: index.md
-  - Getting started: getting-started.md
-  - Implementation:
-      - Memory layouts: layouts.md
-      - Language abstractions: expressions.md
-  - Benchmarks: benchmarks.md
-  - API reference: api.md
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.path
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
 plugins:
   - search
 hooks:
   - tools/docs/figures.py
+extra_css:
+  - styles/solver.css
+  - https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js
+  - javascripts/mathjax.js
 markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - admonition
   - attr_list
   - md_in_html
   - tables
-  - admonition
-  - pymdownx.highlight
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.arithmatex:
-      generic: true
-extra_css:
-  - styles/solver.css
-extra_javascript:
-  - js/math.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js
+  - def_list
+nav:
+  - Overview: index.md
+  - Getting Started:
+      - Prerequisites & Build: getting-started/build.md
+      - Running Tests & Benchmarks: getting-started/benchmarks.md
+  - Memory Layouts:
+      - Architecture Fundamentals: layouts/overview.md
+      - AoS (Legacy OOP): layouts/aos.md
+      - SoA (Hot/Cold Splitting): layouts/soa.md
+      - AoSoA (Tiled Hybrid W=8): layouts/aosoa.md
+  - Language Abstractions:
+      - Expression Template eDSL: abstractions/edsl.md
+      - Compile-Time SI Units: abstractions/units.md
+  - Empirical Performance:
+      - Multi-Arch Scaling (Xeon & M1): performance/multi-arch.md
+      - Locality Trade-Offs & Radar: performance/trade-offs.md
+  - API Reference:
+      - Core & Layouts: api/layouts.md
+      - Solvers & Stencils: api/solvers.md
