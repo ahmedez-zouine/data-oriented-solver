@@ -1,0 +1,12 @@
+:root { --md-primary-fg-color: #103c49; --md-accent-fg-color: #087c75; }
+[data-md-color-scheme="default"] { --md-typeset-a-color: #076b69; }
+[data-md-color-scheme="slate"] { --md-typeset-a-color: #77daca; }
+.md-header { box-shadow: none; border-bottom: 1px solid #588083; }
+.md-typeset h1, .md-typeset h2 { font-weight: 650; letter-spacing: -.035em; }
+.md-typeset .layout-map { color: #edf6ef; background: #103c49; padding: clamp(1rem, 4vw, 2rem); border-radius: .45rem; margin: 1.35rem 0; }
+.layout-map figcaption { text-align: left; font: 600 1.05rem/1.4 system-ui, sans-serif; margin: 0 0 1rem; }
+.layout-map .stream { display: grid; grid-template-columns: 3rem repeat(6,minmax(0,1fr)); gap: .18rem; align-items: center; margin-top: .35rem; font: .78rem/1.7 monospace; }
+.stream span { background: #295361; text-align: center; border-radius: .1rem; }
+.stream .pressure { color: #073934; background: #91e2cd; font-weight: bold; }
+.layout-map small { display: block; margin-top: .8rem; color: #d0e4e5; }
+.md-typeset .plot { background: white; padding: .4rem; border: 1px solid #becac8; border-radius: .3rem; width: 100%; }

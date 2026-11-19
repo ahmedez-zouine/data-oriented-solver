@@ -1,0 +1,58 @@
+site_name: Data-Oriented Solver
+site_description: C++17 grid layouts, stencil kernels and field expressions.
+site_author: Ahmed EZ-ZOUINE
+site_url: https://ahmedez-zouine.github.io/data-oriented-solver/
+repo_url: https://github.com/ahmedez-zouine/data-oriented-solver
+repo_name: ahmedez-zouine/data-oriented-solver
+site_dir: build/site
+theme:
+  name: material
+  font: false
+  icon:
+    logo: material/grid
+  features:
+    - navigation.sections
+    - navigation.footer
+    - content.code.copy
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: custom
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+nav:
+  - Overview: index.md
+  - Getting started: getting-started.md
+  - Implementation:
+      - Memory layouts: layouts.md
+      - Language abstractions: expressions.md
+  - Benchmarks: benchmarks.md
+  - API reference: api.md
+plugins:
+  - search
+hooks:
+  - tools/docs/figures.py
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - tables
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+extra_css:
+  - styles/solver.css
+extra_javascript:
+  - js/math.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js
