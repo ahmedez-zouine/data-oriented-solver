@@ -6,20 +6,6 @@ title: Memory Layout Architecture
 
 In high-performance scientific computing, memory layout dictates computational efficiency. Modern CPUs do not fetch individual floats from DRAM; they fetch contiguous **64-byte cache lines**. How simulation cell properties are arranged in physical memory determines whether each 64-byte fetch supplies useful numbers to vector registers or wastes memory bus bandwidth on irrelevant metadata and alignment padding.
 
-```mermaid
-flowchart TD
-    subgraph AoS ["Array of Structures (AoSLayout) - 112 B / cell"]
-        A1["Cell 0 (112 B: u, v, p, ..., cold metadata, 28 B padding)"] --> A2["Cell 1 (112 B: u, v, p, ..., cold metadata, 28 B padding)"]
-    end
-    subgraph SoA ["Structure of Arrays (SoALayout) - 40 B hot / 88 B total"]
-        S1["p array: p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7] ... (8 B unit stride)"]
-        S2["rhs array: rhs[0], rhs[1], rhs[2], rhs[3], rhs[4], rhs[5], rhs[6], rhs[7] ..."]
-        S3["Cold metadata array: flags, cell_id, material ... (stored in separate vector)"]
-    end
-    subgraph AoSoA ["Tiled Hybrid (AoSoALayout&lt;8&gt;) - 320 B / 64B-aligned tile"]
-        T1["Tile 0 (8 cells): p[0..7] | u[0..7] | v[0..7] | next[0..7] | rhs[0..7]"] --> T2["Tile 1 (8 cells): p[8..15] | u[8..15] | v[8..15] | ..."]
-    end
-```
 
 ## The 64-Byte Cache Line Reality
 

@@ -11,7 +11,7 @@ def sync():
     dst_dir = repo_root / "docs" / "assets"
     dst_dir.mkdir(parents=True, exist_ok=True)
 
-    for pattern in ("fig*.png", "fig*.pdf"):
+    for pattern in ("*.png", "*.pdf", "*.svg"):
         for src in src_dir.glob(pattern):
             dst = dst_dir / src.name
             if not dst.exists() or src.stat().st_mtime > dst.stat().st_mtime:

@@ -54,12 +54,44 @@ Raw performance alone does not determine software viability; code maintainabilit
 
 ## Layout Selection Decision Guide
 
-```mermaid
-flowchart TD
-    Q1{"Is your primary workload a streaming stencil?"}
-    Q1 -- Yes --> Q2{"Do you also perform heavy random multi-field lookups?"}
-    Q1 -- No --> A["Use AoSLayout<br/>(Best point-query locality)"]
-    
-    Q2 -- Yes --> B["Use AoSoALayout&lt;8&gt;<br/>(Bridges stencil SIMD and multi-field spatial locality)"]
-    Q2 -- No --> C["Use SoALayout + eDSL<br/>(Peak throughput, 100% cache efficiency)"]
-```
+Choose the container layout that aligns with your primary memory access pattern:
+
+| Primary Workload Pattern | Key Architectural Constraint | Recommended Container | Key Engineering Advantage |
+| :--- | :--- | :--- | :--- |
+| **Streaming Stencils** (Jacobi, Poisson, Finite Difference) | Memory bus bandwidth &amp; vector execution | **`SoALayout` + eDSL** | 8 B unit stride, 100% cache-line utilization, zero temporary allocations |
+| **Mixed Stencils &amp; Scattered Probes** (Particle-in-Cell) | SIMD registers + multi-field locality | **`AoSoALayout<8>`** | 64 B aligned tiles balance stencil throughput and spatial cache hits |
+| **Scattered Point Queries in Large Grids** (Ray Tracing) | Page faults &amp; TLB misses | **`AoSLayout`** | All cell properties co-located in 1-2 cache lines (1.66x faster in DRAM) |
+
+<div class="grid cards" markdown>
+
+-   **When to Choose `SoALayout` + eDSL**
+
+    ---
+
+    - **Workload:** Iterative streaming sweeps where entire field arrays are updated sequentially.
+    - **Advantage:** Maximum cache-line utilization (100%), unit-stride SIMD loads without gather instructions, and up to **17.88x speedup**.
+    - **Loop Fusion:** Fuses arithmetic into a single loop pass, eliminating 224 MiB of temporary heap allocations.
+
+    [Explore SoALayout &rarr;](../layouts/soa.md)
+
+-   **When to Choose `AoSoALayout<8>`**
+
+    ---
+
+    - **Workload:** Multi-physics codes that combine stencil sweeps with scattered multi-field particle sampling.
+    - **Advantage:** 8-element tiles fill a 64 B cache line for AVX-512 while keeping all 5 hot variables within 320 B.
+    - **Balance:** Recovers spatial locality without sacrificing vector register alignment.
+
+    [Explore AoSoALayout &rarr;](../layouts/aosoa.md)
+
+-   **When to Choose `AoSLayout`**
+
+    ---
+
+    - **Workload:** Random point queries that inspect velocity, pressure, and material metadata at scattered indices.
+    - **Advantage:** Co-locates all 14 cell fields in a single 112 B record (1-2 cache lines).
+    - **DRAM Scaling:** **1.66x faster** than SoA on scattered queries at 4M cells by avoiding multi-page virtual memory dispersal.
+
+    [Explore AoSLayout &rarr;](../layouts/aos.md)
+
+</div>
