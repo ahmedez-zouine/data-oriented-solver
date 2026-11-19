@@ -9,12 +9,12 @@ To understand how memory layout and vectorization behave across different CPU de
 - **Apple Silicon M1 (ARM64):** 3.20 GHz Firestorm cores, **128-bit ARM64 NEON** vector registers, 128 KB L1d cache, 12 MB shared L2 cache, running macOS with Apple Clang.
 
 <div class="dos-figure-frame">
-  <a href="../../assets/fig7_multi_arch_comparison.pdf">
-    <img src="../../assets/fig7_multi_arch_comparison.png" alt="Multi-architecture scaling across Apple M1 NEON and Intel Xeon AVX-512" />
+  <a href="../assets/fig7_multi_arch_comparison.pdf">
+    <img src="../assets/fig7_multi_arch_comparison.png" alt="Multi-architecture scaling across Apple M1 NEON and Intel Xeon AVX-512" />
   </a>
   <div class="dos-figure-caption">
     Figure 1: (a) 2D Jacobi stencil speedup across grid scales; (b) eDSL loop-fusion speedup over eager vector temporaries; (c) AVX-512 vectorization factor decomposition on Intel Xeon.
-    <a href="../../assets/fig7_multi_arch_comparison.pdf">Open high-resolution vector PDF &rarr;</a>
+    <a href="../assets/fig7_multi_arch_comparison.pdf">Open high-resolution vector PDF &rarr;</a>
   </div>
 </div>
 

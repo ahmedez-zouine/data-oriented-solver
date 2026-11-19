@@ -7,12 +7,12 @@ title: Locality Trade-Offs
 High-performance computing is governed by trade-offs. While Structure of Arrays (`SoA`) provides dramatic speedups for contiguous streaming stencils, no single memory layout is universally optimal for every access pattern or development team.
 
 <div class="dos-figure-frame">
-  <a href="../../assets/fig5_cognitive_tradeoffs.pdf">
-    <img src="../../assets/fig5_cognitive_tradeoffs.png" alt="Random multi-property query crossover and 5-axis quality radar" />
+  <a href="../assets/fig5_cognitive_tradeoffs.pdf">
+    <img src="../assets/fig5_cognitive_tradeoffs.png" alt="Random multi-property query crossover and 5-axis quality radar" />
   </a>
   <div class="dos-figure-caption">
     Figure 2: (a) 50,000-query random multi-property lookup times showing the cache-to-DRAM crossover; (b) 5-axis normalized implementation quality profile comparing OOP AoS, manual SoA, and Generative eDSL.
-    <a href="../../assets/fig5_cognitive_tradeoffs.pdf">Open high-resolution vector PDF &rarr;</a>
+    <a href="../assets/fig5_cognitive_tradeoffs.pdf">Open high-resolution vector PDF &rarr;</a>
   </div>
 </div>
 
