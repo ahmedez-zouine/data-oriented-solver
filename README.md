@@ -111,3 +111,13 @@ data-oriented-solver/
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Global Visitors
+
+<div align="center">
+
+[![Global Visitors](https://mapmyvisitors.com/map.png?cl=6a7bb5&w=a&t=tt&d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=3b7c1a)](https://mapmyvisitors.com/web/DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo)
+
+</div>
