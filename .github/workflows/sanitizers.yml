@@ -1,4 +1,4 @@
-name: Sanitizers (ASan & UBSan)
+name: AddressSanitizer and UndefinedBehaviorSanitizer
 
 on:
   push:
@@ -7,19 +7,27 @@ on:
     branches: [Master, main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   asan-ubsan:
-    name: Ubuntu Clang (ASan + UBSan)
+    name: Ubuntu x86_64, Clang, Debug
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ASAN_OPTIONS: detect_leaks=1:halt_on_error=1
+      UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+
     steps:
-      - name: Checkout repository
+      - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Configure CMake with Sanitizers
+      - name: Configure C++17 sanitizer build
         run: |
           cmake -B build-san -S . \
             -DCMAKE_CXX_COMPILER=clang++ \
@@ -27,23 +35,29 @@ jobs:
             -DENABLE_NATIVE_SIMD=OFF \
             -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer"
 
-      - name: Build
+      - name: Build all targets with sanitizers
         run: cmake --build build-san --parallel
 
-      - name: Run CTest under ASan + UBSan
+      - name: Confirm 36 registered CTest cases
         run: |
-          ctest --test-dir build-san -E dsl_fusion --output-on-failure | tee san_ctest.txt
+          test_count="$(ctest --test-dir build-san -N | sed -n 's/^Total Tests: //p')"
+          if [ "$test_count" != "36" ]; then
+            echo "Expected 36 registered tests, found ${test_count:-0}."
+            exit 1
+          fi
+          echo "CTest registered all 36 required cases."
 
-      - name: Run Benchmark Smoke Test under ASan + UBSan
-        run: |
-          (cd build-san && ./solver_benchmark --quick)
+      - name: Run all 36 cases under ASan and UBSan
+        run: ctest --test-dir build-san --output-on-failure
 
-      - name: Publish Sanitizer Summary
+      - name: Run benchmark smoke check
+        run: ./build-san/solver_benchmark --quick > build-san/benchmark-smoke.log 2>&1
+
+      - name: Write sanitizer summary
         if: always()
         run: |
           {
-            echo "### ASan + UBSan Verification (Ubuntu Clang)"
-            echo '```text'
-            tail -n 10 san_ctest.txt || true
-            echo '```'
+            echo "### AddressSanitizer and UndefinedBehaviorSanitizer"
+            echo "The Ubuntu Clang Debug job is configured to run all 36 CTest cases with address, leak, and undefined behavior checks."
+            echo "The benchmark smoke check keeps generated timings and hardware profiles in the temporary runner workspace."
           } >> "$GITHUB_STEP_SUMMARY"

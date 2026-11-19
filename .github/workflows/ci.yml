@@ -1,4 +1,4 @@
-name: Build & CTest
+name: Build and CTest
 
 on:
   push:
@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [Master, main]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,60 +18,80 @@ jobs:
   ctest:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: Ubuntu x86_64 — GCC (Release)
+          - name: Ubuntu x86_64, GCC, Release
             os: ubuntu-latest
             cxx: g++
             build_type: Release
-          - name: Ubuntu x86_64 — GCC (Debug)
+          - name: Ubuntu x86_64, GCC, Debug
             os: ubuntu-latest
             cxx: g++
             build_type: Debug
-          - name: Ubuntu x86_64 — Clang (Release)
+          - name: Ubuntu x86_64, Clang, Release
             os: ubuntu-latest
             cxx: clang++
             build_type: Release
-          - name: macOS ARM64 — AppleClang (Release)
+          - name: macOS ARM64, AppleClang, Release
             os: macos-latest
             cxx: clang++
             build_type: Release
-          - name: Windows x64 — MSVC (Release)
+          - name: Windows x64, MSVC, Release
             os: windows-latest
             cxx: cl
             build_type: Release
 
     steps:
-      - name: Checkout repository
+      - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Configure CMake
+      - name: Configure C++17 build
         shell: bash
         run: |
-          if [ "${{ runner.os }}" = "Windows" ]; then
+          set -euo pipefail
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
             cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           else
-            cmake -B build -S . -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+            cmake -B build -S . \
+              -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           fi
 
-      - name: Build
+      - name: Confirm 36 registered CTest cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          test_count="$(ctest --test-dir build -C ${{ matrix.build_type }} -N | sed -n 's/^Total Tests: //p')"
+          if [[ "$test_count" != "36" ]]; then
+            echo "Expected 36 registered tests, found ${test_count:-0}."
+            exit 1
+          fi
+          echo "CTest registered all 36 required cases."
+
+      - name: Build all targets
         shell: bash
         run: cmake --build build --config ${{ matrix.build_type }} --parallel
 
-      - name: Run CTest (36 tests)
+      - name: Run all CTest cases
         shell: bash
         run: |
+          set -o pipefail
           ctest --test-dir build -C ${{ matrix.build_type }} --output-on-failure | tee ctest_output.txt
 
-      - name: Publish CTest Summary
+      - name: Write test summary
         if: always()
         shell: bash
         run: |
           {
-            echo "### ${{ matrix.name }} — CTest Results"
-            echo '```text'
-            tail -n 10 ctest_output.txt || true
-            echo '```'
+            echo "### ${{ matrix.name }}"
+            if grep -Fq "100% tests passed, 0 tests failed out of 36" ctest_output.txt 2>/dev/null; then
+              echo "Result: all 36 CTest cases passed."
+            elif grep -Eq '[0-9]+% tests passed, [1-9][0-9]* tests failed out of 36' ctest_output.txt 2>/dev/null; then
+              echo "Result: CTest reported one or more failures. Review the test step for failed case names."
+            else
+              echo "Result: the test run did not complete. Review the configure, build, and test steps."
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
