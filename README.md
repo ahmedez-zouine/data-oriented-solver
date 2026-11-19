@@ -1,8 +1,8 @@
 # Data-Oriented C++17 Scientific Solver (`data-oriented-solver`)
 
+[![CI](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml/badge.svg)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml)
 [![Standard](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
 [![Build](https://img.shields.io/badge/CMake-3.16+-green.svg)](https://cmake.org/)
-[![Tests](https://img.shields.io/badge/CTest-Passing-brightgreen.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A high-performance C++17 scientific computing and benchmarking framework designed to evaluate the cache performance, memory footprint, and compiler auto-vectorization of **Data-Oriented Design (DoD)** versus traditional **Object-Oriented Design (AoS)**.

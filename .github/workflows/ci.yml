@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [Master, main]
+  pull_request:
+    branches: [Master, main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu GCC (Release)
+            os: ubuntu-latest
+            cxx: g++
+            build_type: Release
+          - name: Ubuntu GCC (Debug)
+            os: ubuntu-latest
+            cxx: g++
+            build_type: Debug
+          - name: Ubuntu Clang (Release)
+            os: ubuntu-latest
+            cxx: clang++
+            build_type: Release
+          - name: macOS AppleClang (Release)
+            os: macos-latest
+            cxx: clang++
+            build_type: Release
+          - name: Windows MSVC (Release)
+            os: windows-latest
+            cxx: cl
+            build_type: Release
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        shell: bash
+        env:
+          CXX: ${{ matrix.cxx }}
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          else
+            cmake -B build -S . -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          fi
+
+      - name: Build
+        shell: bash
+        run: cmake --build build --config ${{ matrix.build_type }} --parallel
+
+      - name: Run CTest (36 tests)
+        shell: bash
+        run: ctest --test-dir build -C ${{ matrix.build_type }} --output-on-failure
+
+      - name: Benchmark smoke test (--quick)
+        shell: bash
+        run: |
+          cd build
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            ./${{ matrix.build_type }}/solver_benchmark.exe --quick
+          else
+            ./solver_benchmark --quick
+          fi
+
+  sanitizers:
+    name: Ubuntu Clang (ASan + UBSan)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure CMake with Sanitizers
+        run: |
+          cmake -B build-san -S . \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DENABLE_NATIVE_SIMD=OFF \
+            -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer"
+
+      - name: Build
+        run: cmake --build build-san --parallel
+
+      - name: Run CTest under ASan + UBSan
+        run: ctest --test-dir build-san -E dsl_fusion --output-on-failure
+
+      - name: Run quick benchmark under ASan + UBSan
+        run: (cd build-san && ./solver_benchmark --quick)
