@@ -1,2 +1,2 @@
-mkdocs-material>=9.5,<10.0
+zensical>=0.1.2
 pymdown-extensions>=10.7

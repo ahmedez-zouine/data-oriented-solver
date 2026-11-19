@@ -1,0 +1,132 @@
+[project]
+site_name = "Data-Oriented Solver"
+site_description = "High-performance C++17 scientific solver evaluating AoS, SoA, and tiled AoSoA layouts, expression template loop fusion, and compile-time SI units."
+site_author = "Ahmed EZ-ZOUINE"
+site_url = "https://ahmedez-zouine.github.io/data-oriented-solver/"
+repo_name = "ahmedez-zouine/data-oriented-solver"
+repo_url = "https://github.com/ahmedez-zouine/data-oriented-solver"
+copyright = "Copyright &copy; 2026 Ahmed EZ-ZOUINE &middot; MIT License"
+
+extra_css = ["stylesheets/extra.css"]
+extra_javascript = [
+  "javascripts/mathjax.js",
+  "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js",
+]
+
+nav = [
+  { "Overview" = "index.md" },
+  { "Getting Started" = [
+      { "Prerequisites & Build" = "getting-started/build.md" },
+      { "Tests & Benchmarks" = "getting-started/benchmarks.md" },
+    ]
+  },
+  { "Memory Layouts" = [
+      { "Layout Architecture" = "layouts/overview.md" },
+      { "Array of Structures (AoS)" = "layouts/aos.md" },
+      { "Structure of Arrays (SoA)" = "layouts/soa.md" },
+      { "Tiled Hybrid (AoSoA)" = "layouts/aosoa.md" },
+    ]
+  },
+  { "Abstractions" = [
+      { "Expression Template eDSL" = "abstractions/edsl.md" },
+      { "Compile-Time SI Units" = "abstractions/units.md" },
+    ]
+  },
+  { "Benchmarks" = [
+      { "Multi-Arch Scaling" = "performance/multi-arch.md" },
+      { "Locality Trade-Offs" = "performance/trade-offs.md" },
+    ]
+  },
+  { "API Reference" = [
+      { "Core & Layouts" = "api/layouts.md" },
+      { "Solvers & Stencils" = "api/solvers.md" },
+    ]
+  },
+]
+
+[project.theme]
+variant = "modern"
+language = "en"
+favicon = "assets/favicon.svg"
+logo = "assets/favicon.svg"
+
+features = [
+  "announce.dismiss",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.expand",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.tabs.sticky",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "search.suggest",
+  "toc.follow",
+]
+
+[project.theme.font]
+text = "Plus Jakarta Sans"
+code = "JetBrains Mono"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "indigo"
+accent = "indigo"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/ahmedez-zouine/data-oriented-solver"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc.permalink = true
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}
