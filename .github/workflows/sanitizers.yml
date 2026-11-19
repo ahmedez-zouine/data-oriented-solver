@@ -1,0 +1,49 @@
+name: Sanitizers (ASan & UBSan)
+
+on:
+  push:
+    branches: [Master, main]
+  pull_request:
+    branches: [Master, main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  asan-ubsan:
+    name: Ubuntu Clang (ASan + UBSan)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure CMake with Sanitizers
+        run: |
+          cmake -B build-san -S . \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DENABLE_NATIVE_SIMD=OFF \
+            -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer"
+
+      - name: Build
+        run: cmake --build build-san --parallel
+
+      - name: Run CTest under ASan + UBSan
+        run: |
+          ctest --test-dir build-san -E dsl_fusion --output-on-failure | tee san_ctest.txt
+
+      - name: Run Benchmark Smoke Test under ASan + UBSan
+        run: |
+          (cd build-san && ./solver_benchmark --quick)
+
+      - name: Publish Sanitizer Summary
+        if: always()
+        run: |
+          {
+            echo "### ASan + UBSan Verification (Ubuntu Clang)"
+            echo '```text'
+            tail -n 10 san_ctest.txt || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

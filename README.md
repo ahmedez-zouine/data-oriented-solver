@@ -1,8 +1,9 @@
 # Data-Oriented C++17 Scientific Solver (`data-oriented-solver`)
 
-[![CI](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml/badge.svg)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml)
+[![Build & CTest](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml)
+[![Benchmarks](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml)
+[![Sanitizers](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml)
 [![Standard](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
-[![Build](https://img.shields.io/badge/CMake-3.16+-green.svg)](https://cmake.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A high-performance C++17 scientific computing and benchmarking framework designed to evaluate the cache performance, memory footprint, and compiler auto-vectorization of **Data-Oriented Design (DoD)** versus traditional **Object-Oriented Design (AoS)**.
