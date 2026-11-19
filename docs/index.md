@@ -98,7 +98,7 @@ ctest --test-dir build --output-on-failure
 <div class="dos-map-container">
   <div class="dos-section-header">
     <div class="dos-section-title">Global Visitors</div>
-    <div class="dos-section-sub">Visitor activity across multi-architecture computing research hubs</div>
+    <div class="dos-section-sub">Visitor activity across multi-architecture computing research hubs &middot; <a href="https://mapmyvisitors.com/web/1c9kq" target="_blank" rel="noopener" style="color: var(--md-accent-fg-color); font-weight: 600;">View live stats &rarr;</a></div>
   </div>
   <div class="dos-map-frame">
     <script type='text/javascript' id='mapmyvisitors' src='https://mapmyvisitors.com/map.js?cl=6a7bb5&w=a&t=tt&d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=3b7c1a'></script>

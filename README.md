@@ -121,13 +121,12 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## Global Readership
+## Global Visitors
 
 <div align="center">
-  <a href="https://mapmyvisitors.com/?d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo" target="_blank" rel="noopener noreferrer">
-    <img src="https://mapmyvisitors.com/map.png?cl=6a7bb5&w=650&t=tt&d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=3b7c1a" alt="MapMyVisitors Live Traffic" width="650" style="max-width: 100%; border-radius: 8px;">
-  </a>
-  <p><em>Live worldwide visitor traffic across the high-performance computing and computer architecture research communities.</em></p>
-</div>
 
----
+<a href="https://mapmyvisitors.com/web/1c9kq" target="_blank" rel="noopener">
+  <img src="https://mapmyvisitors.com/map.png?cl=6a7bb5&w=1200&t=tt&d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=3b7c1a" alt="Global Visitors Map" width="700" style="max-width: 100%; height: auto;" />
+</a>
+
+</div>
