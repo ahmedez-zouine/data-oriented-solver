@@ -19,6 +19,29 @@ A high-performance C++17 scientific computing and benchmarking framework designe
 
 ---
 
+## Performance & Empirical Benchmarks
+
+### 1. Hardware Scaling & SIMD Vectorization (Xeon AVX-512 vs. Apple M1 NEON)
+
+[![Multi-Architecture Performance Comparison](assets/fig7_multi_arch_comparison.png)](assets/fig7_multi_arch_comparison.pdf)
+<sub>Click image to view vector PDF: [assets/fig7_multi_arch_comparison.pdf](assets/fig7_multi_arch_comparison.pdf)</sub>
+
+Empirical evaluation across physical hardware architectures (Apple Silicon M1 ARM64 NEON and Intel Xeon Platinum 8370C x86_64 AVX-512):
+- **(a) Multi-Regime Stencil Speedup**: Measures cache-boundary transitions (L1/L2 cache fit, 12 MB L2 boundary on M1, and Xeon AVX-512 vectorization peaks up to 19.6x to 33.8x).
+- **(b) Embedded DSL Loop Fusion**: Compile-time expression templates eliminate temporary copies, avoiding up to 224 MB of transient heap allocations and achieving up to 10.4x speedup.
+- **(c) Xeon Factor Decomposition**: Isolates the performance contributions of data layout, compiler vectorization (SSE4.2 128-bit vs. AVX-512 512-bit), and Clang loop unrolling.
+
+### 2. Random-Access Locality Trade-Offs & Software Maintainability
+
+[![Trade-Off Analysis and Cognitive Metrics](assets/fig5_cognitive_tradeoffs.png)](assets/fig5_cognitive_tradeoffs.pdf)
+<sub>Click image to view vector PDF: [assets/fig5_cognitive_tradeoffs.pdf](assets/fig5_cognitive_tradeoffs.pdf)</sub>
+
+Engineering trade-offs comparing Object-Oriented Design (AoS), raw Structure-of-Arrays (SoA), and the proposed C++17 Generative eDSL:
+- **(a) Random Multi-Property Query Crossover**: While SoA delivers optimal streaming performance, random multi-property probes at DRAM scale ($N = 4\text{M}$) incur a $1.66\times$ TLB/cache-line scatter penalty ($2.33\text{ ms}$ vs. $1.40\text{ ms}$); tiled **AoSoA** recovers spatial locality ($2.10\text{ ms}$).
+- **(b) Program Comprehension vs. Hardware Efficiency**: 5-axis normalized polar profile evaluating Maintainability Index (MI), Code Conciseness, Mental Effort, Cache Efficiency, and Stencil Speedup—showing that generative expression templates match manual SoA speedup while preserving OOP maintainability.
+
+---
+
 ## Layout Comparison
 
 | Architecture | Memory Layout | Cell Size | Hot Set | SIMD Contiguity |
@@ -59,6 +82,7 @@ data-oriented-solver/
 ├── CMakeLists.txt          # CMake build configuration
 ├── LICENSE                 # MIT License
 ├── README.md               # Project documentation
+├── assets/                 # Architecture figures and benchmark plots
 ├── include/dos/            # Modular C++17 library headers
 │   ├── core/               # Types, units, platform traits
 │   ├── layout/             # AoS, SoA, and AoSoA memory containers

@@ -2,6 +2,7 @@
 # Local Agent Memory, Notes & Drafts (STRICTLY LOCAL - DO NOT COMMIT)
 # ============================================================================
 *.pdf
+!assets/*.pdf
 tmp/
 *.local.md
 .venv/
