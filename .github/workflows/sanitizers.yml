@@ -38,26 +38,9 @@ jobs:
       - name: Build all targets with sanitizers
         run: cmake --build build-san --parallel
 
-      - name: Confirm 36 registered CTest cases
-        run: |
-          test_count="$(ctest --test-dir build-san -N | sed -n 's/^Total Tests: //p')"
-          if [ "$test_count" != "36" ]; then
-            echo "Expected 36 registered tests, found ${test_count:-0}."
-            exit 1
-          fi
-          echo "CTest registered all 36 required cases."
+      - name: Run CTest under ASan and UBSan
+        run: python3 .github/scripts/run_ctest.py build-san Debug
 
-      - name: Run all 36 cases under ASan and UBSan
-        run: ctest --test-dir build-san --output-on-failure
-
-      - name: Run benchmark smoke check
-        run: ./build-san/solver_benchmark --quick > build-san/benchmark-smoke.log 2>&1
-
-      - name: Write sanitizer summary
-        if: always()
-        run: |
-          {
-            echo "### AddressSanitizer and UndefinedBehaviorSanitizer"
-            echo "The Ubuntu Clang Debug job is configured to run all 36 CTest cases with address, leak, and undefined behavior checks."
-            echo "The benchmark smoke check keeps generated timings and hardware profiles in the temporary runner workspace."
-          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Exercise the benchmark under sanitizers
+        working-directory: build-san
+        run: ./solver_benchmark --quick > benchmark-smoke.log 2>&1

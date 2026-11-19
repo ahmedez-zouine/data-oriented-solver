@@ -60,38 +60,9 @@ jobs:
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           fi
 
-      - name: Confirm 36 registered CTest cases
-        shell: bash
-        run: |
-          set -euo pipefail
-          test_count="$(ctest --test-dir build -C ${{ matrix.build_type }} -N | sed -n 's/^Total Tests: //p')"
-          if [[ "$test_count" != "36" ]]; then
-            echo "Expected 36 registered tests, found ${test_count:-0}."
-            exit 1
-          fi
-          echo "CTest registered all 36 required cases."
-
       - name: Build all targets
         shell: bash
         run: cmake --build build --config ${{ matrix.build_type }} --parallel
 
-      - name: Run all CTest cases
-        shell: bash
-        run: |
-          set -o pipefail
-          ctest --test-dir build -C ${{ matrix.build_type }} --output-on-failure | tee ctest_output.txt
-
-      - name: Write test summary
-        if: always()
-        shell: bash
-        run: |
-          {
-            echo "### ${{ matrix.name }}"
-            if grep -Fq "100% tests passed, 0 tests failed out of 36" ctest_output.txt 2>/dev/null; then
-              echo "Result: all 36 CTest cases passed."
-            elif grep -Eq '[0-9]+% tests passed, [1-9][0-9]* tests failed out of 36' ctest_output.txt 2>/dev/null; then
-              echo "Result: CTest reported one or more failures. Review the test step for failed case names."
-            else
-              echo "Result: the test run did not complete. Review the configure, build, and test steps."
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Run CTest and verify required cases
+        run: python .github/scripts/run_ctest.py build ${{ matrix.build_type }}

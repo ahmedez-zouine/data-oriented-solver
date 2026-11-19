@@ -1,0 +1,37 @@
+name: C++17 public API
+
+on:
+  push:
+    branches: [Master, main]
+  pull_request:
+    branches: [Master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  consumer:
+    name: Public headers and CMake consumer (${{ matrix.cxx }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        cxx: [g++, clang++]
+    env:
+      CXX: ${{ matrix.cxx }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure the consumer project
+        run: cmake -S .github/checks/public-api -B build/public-api -DBUILD_TESTING=OFF -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release
+      - name: Compile each public header independently
+        run: cmake --build build/public-api --target public_headers --parallel 2
+      - name: Link the consumer against the public CMake targets
+        run: cmake --build build/public-api --target solver_consumer
+      - name: Verify the Jacobi result
+        run: ctest --test-dir build/public-api --no-tests=error --output-on-failure

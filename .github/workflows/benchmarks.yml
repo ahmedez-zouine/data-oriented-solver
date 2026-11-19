@@ -1,4 +1,4 @@
-name: Benchmarks (macOS ARM64 & Ubuntu)
+name: Benchmark Smoke Checks
 
 on:
   push:
@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [Master, main]
   workflow_dispatch:
+
+# This workflow checks that benchmark commands run. It never publishes their output.
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,79 +19,55 @@ jobs:
   benchmark:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: macOS ARM64 (Apple Clang)
+          - name: macOS ARM64, AppleClang
             os: macos-latest
             cxx: clang++
             vec_flag: "-Rpass=loop-vectorize"
-            artifact_name: results-macos-arm64-appleclang
-          - name: Ubuntu x86_64 (GCC)
+          - name: Ubuntu x86_64, GCC
             os: ubuntu-latest
             cxx: g++
             vec_flag: "-fopt-info-vec-optimized"
-            artifact_name: results-ubuntu-x86_64-gcc
-          - name: Ubuntu x86_64 (Clang)
+          - name: Ubuntu x86_64, Clang
             os: ubuntu-latest
             cxx: clang++
             vec_flag: "-Rpass=loop-vectorize"
-            artifact_name: results-ubuntu-x86_64-clang
 
     steps:
-      - name: Checkout repository
+      - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Configure CMake (Release + Vectorization Diagnostics)
+      - name: Configure optimized C++17 build
         run: |
           cmake -B build -S . \
             -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_CXX_FLAGS="${{ matrix.vec_flag }}"
 
-      - name: Build & Capture Compiler Vectorization Report
-        run: |
-          cmake --build build --parallel 2>&1 | tee build/vectorization_report.txt
+      - name: Build benchmark and capture local diagnostics
+        run: cmake --build build --target solver_benchmark --parallel > build/compiler-diagnostics.log 2>&1
 
-      - name: Run Benchmark Suite (--quick)
+      - name: Run quick benchmark smoke checks
         run: |
+          set -euo pipefail
           cd build
-          if [ "${{ runner.os }}" = "macOS" ] && [ -f ../tools/benchmark_macos.sh ]; then
-            sh ../tools/benchmark_macos.sh ./solver_benchmark --quick | tee benchmark_output.txt
+          if [[ "${{ runner.os }}" == "macOS" && -f ../tools/benchmark_macos.sh ]]; then
+            sh ../tools/benchmark_macos.sh ./solver_benchmark --quick > benchmark-smoke.log 2>&1
           else
-            ./solver_benchmark --quick | tee benchmark_output.txt
+            ./solver_benchmark --quick > benchmark-smoke.log 2>&1
           fi
-          ./solver_benchmark --suite grid2d --quick | tee -a benchmark_output.txt
+          for table in benchmark_results.csv jacobi_2d.csv dsl_benchmark.csv multicore_benchmark.csv; do
+            if ! awk 'END {exit (NR < 2)}' "$table"; then
+              echo "Missing header or data row in $table"
+              exit 1
+            fi
+          done
+          python3 -c 'import json; assert json.load(open("platform_profile.json"))["cpu_arch"]'
 
-      - name: Publish Benchmark Results to Job Summary
+      - name: Write benchmark summary
         run: |
-          {
-            echo "## ${{ matrix.name }}"
-            echo ""
-            echo "### Benchmark Output"
-            echo '```text'
-            cat build/benchmark_output.txt
-            echo '```'
-            echo ""
-            echo "### Platform Profile"
-            echo '```json'
-            cat build/platform_profile.json || true
-            echo '```'
-            echo ""
-            echo "### Vectorized Loops Sample"
-            echo '```text'
-            grep -i "vectorized" build/vectorization_report.txt | head -n 20 || echo "No vectorization remarks captured."
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Upload Benchmark & Vectorization Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifact_name }}
-          path: |
-            build/benchmark_output.txt
-            build/vectorization_report.txt
-            build/*.csv
-            build/platform_profile.json
-          if-no-files-found: ignore
+          echo "Quick run completed with 4 result tables and 1 hardware profile." >> "$GITHUB_STEP_SUMMARY"

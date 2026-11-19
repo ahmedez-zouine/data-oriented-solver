@@ -1,14 +1,22 @@
 # Data-Oriented C++17 Scientific Solver (`data-oriented-solver`)
 
-[![Build & CTest](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml)
-[![Benchmarks](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml)
-[![Sanitizers](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml)
 [![Standard](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A high-performance C++17 scientific computing and benchmarking framework designed to evaluate the cache performance, memory footprint, and compiler auto-vectorization of **Data-Oriented Design (DoD)** versus traditional **Object-Oriented Design (AoS)**.
 
 ---
+
+## Continuous integration
+
+Select a badge to open its workflow runs. The badges show the status of `Master`.
+
+| Workflow status | What it checks |
+| --- | --- |
+| [![Build and CTest](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/ci.yml?query=branch%3AMaster) | 36 required cases across 5 build configurations. |
+| [![Sanitizers](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sanitizers.yml?query=branch%3AMaster) | Address and undefined behavior checks with Ubuntu Clang. |
+| [![C++17 public API](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml?query=branch%3AMaster) | Each public header compiles on its own. A separate CMake application links the solver and runs a Jacobi step. |
+| [![Benchmark smoke checks](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml?query=branch%3AMaster) | A quick run writes 4 result tables and a hardware profile. |
 
 ## Key Features
 
@@ -66,6 +74,8 @@ cmake --build build -j
 ```bash
 ctest --test-dir build --output-on-failure
 ```
+
+See the [CI guide](.github/CI.md) for the compiler matrix, sanitizer commands and instructions for reproducing a failed case.
 
 ### Run Benchmarks
 
