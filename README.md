@@ -93,6 +93,10 @@ The default sweep covers 4,096 to 4,194,304 cells. `--suite grid` writes the his
 
 Linux reads cache sizes from sysfs. On macOS, run `(cd build && sh ../tools/benchmark_macos.sh ./solver_benchmark --quick)` to include runtime sysctl values. The profile labels the cache-line fallback and reports unavailable cache capacities as 0. The stream-copy probe times one read and one write of 67,108,864 bytes each.
 
+### Archiving an Ubuntu run
+
+Run `bash tools/verify_ubuntu.sh` from the checkout on the VM. After the 3 builds pass their 36 tests each, the script runs 5 repetitions per compiler and saves the verified results under `ubuntu_results/ubuntu-check.<run-id>/`. Each directory contains the build evidence, raw repeats, a SHA-256 manifest and `speedups.csv`. The summary gives the minimum, median and maximum of 5 paired timing ratios at each grid size or thread count. Run `sha256sum -c SHA256SUMS` inside the archive directory to verify the files after transfer.
+
 ### Adding a solver
 
 A new header such as `include/dos/solvers/heat.hpp` can include `dos/core/types.hpp` and the desired layout header. The 3 layouts provide `size()` and indexed access to `u`, `v`, `p`, `p_next` and `rhs`. A consumer can link `dos::layouts` alone. The existing kernels require no registration or edits. Targets `dos::core`, `dos::dsl` and `dos::solvers` expose the other header modules. Link `dos::hardware` when calling the compiled hardware probe.

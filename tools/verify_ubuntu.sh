@@ -5,7 +5,13 @@ export LC_ALL=C
 root=$(cd "$(dirname "$0")/.." && pwd)
 mkdir -p "$root/build"
 run=$(mktemp -d "$root/build/ubuntu-check.XXXXXXXX")
-echo "Results: $run"
+echo "Build and timing files: $run"
+# Record the sources used for this build before running any timings.
+(cd "$root" && {
+    sha256sum CMakeLists.txt
+    find include src tests tools -type f ! -path '*/__pycache__/*' -print0 |
+        sort -z | xargs -0 sha256sum
+}) > "$run/source-sha256.txt"
 gcc_cxx=${GCC_CXX:-g++}
 clang_cxx=${CLANG_CXX:-clang++}
 jobs=${JOBS:-2}
@@ -49,62 +55,30 @@ for name in gcc clang; do
     (cd "$dir/results" && "$dir/build/solver_benchmark" --suite all) | tee "$dir/benchmark.log"
 done
 
-python3 - "$run" <<'PY'
-import csv
-import json
-import math
-from pathlib import Path
-import sys
-
-root = Path(sys.argv[1])
-sizes = [4096, 16384, 65536, 262144, 1048576, 4194304]
-reference = {}
-def check(condition, message):
-    if not condition:
-        raise SystemExit(message)
-
-for compiler in ("gcc", "clang"):
-    directory = root / compiler / "results"
-    profile = json.loads((directory / "platform_profile.json").read_text())
-    check(profile["sizeof_aos_cell"] == 112 and profile["sizeof_cold_meta"] == 32,
-          f"{compiler}: unexpected record sizes")
-    check(profile["stream_copy_gb_per_s"] > 0, f"{compiler}: invalid copy bandwidth")
-    for name in ("benchmark_results", "dsl_benchmark", "jacobi_2d", "multicore_benchmark"):
-        path = directory / (name + ".csv")
-        with path.open() as f:
-            rows = list(csv.DictReader(f))
-        check(rows, f"{path}: empty CSV")
-        for row in rows:
-            for key, value in row.items():
-                x = float(value)
-                check(math.isfinite(x) and (not key.endswith("_ms") or x > 0),
-                      f"{path}: invalid {key}={value}")
-        if name == "multicore_benchmark":
-            threads = [int(r["Threads"]) for r in rows]
-            count = profile["hw_threads"]
-            expected = [2**i for i in range(count.bit_length()) if 2**i < count] + [count]
-            check(threads == expected, f"{path}: unexpected thread counts {threads}")
-            continue
-        if name == "jacobi_2d":
-            actual = [int(r["Width"]) * int(r["Height"]) for r in rows]
-            for n, row in zip(actual, rows):
-                # Convert sums to mean cell pressures before comparing different compilers.
-                values = [float(row[k]) / n for k in ("AoS_sum", "SoA_sum", "AoSoA_sum")]
-                expected = reference.setdefault(n, values[0])
-                check(all(abs(v - expected) <= 1e-12 for v in values),
-                      f"{path}: mean pressure mismatch at {n} cells")
-        else:
-            actual = [int(r["N"]) for r in rows]
-        check(actual == sizes, f"{path}: unexpected grid sizes {actual}")
-        if name == "dsl_benchmark":
-            for n, row in zip(sizes, rows):
-                expected_mib = 7 * n * 8 / 2**20
-                check(float(row["Temp_RAM_Saved_MB"]) == expected_mib,
-                      f"{path}: unexpected temporary allocation volume at {n} cells")
-    print(f'{compiler}: 4 CSV files passed; compiled ISA: {profile["simd_isa"]}')
-PY
-
 # Run sanitizers separately from timed Release benchmarks.
 UBSAN_OPTIONS=halt_on_error=1 ASAN_OPTIONS=halt_on_error=1 \
     build_and_test sanitizers "${SAN_CXX:-$gcc_cxx}" Debug '-fsanitize=address,undefined -fno-omit-frame-pointer'
-echo "PASS: GCC, Clang, sanitizer tests and benchmark outputs. Results: $run"
+# Alternate compiler order across the five paired timing repetitions.
+for rep in 1 2 3 4 5; do
+    compilers=(gcc clang)
+    if (( rep % 2 == 0 )); then compilers=(clang gcc); fi
+    for compiler in "${compilers[@]}"; do
+        out="$run/repeats/$compiler/$rep"
+        mkdir -p "$out"
+        echo "Repeat $rep/5: $compiler"
+        (cd "$out" && "$run/$compiler/build/solver_benchmark" --suite all > benchmark.log 2>&1)
+    done
+done
+
+# Publish only after every expected result has passed validation.
+stage="$run/archive"
+dest="$root/ubuntu_results/${run##*/}"
+mkdir -p "$root/ubuntu_results"
+mkdir "$stage"
+python3 "$root/tools/summarize_ubuntu.py" "$run" "$run/repeats" "$stage/speedups.csv"
+(cd "$run" && tar -czf "$stage/evidence.tar.gz" environment.txt source-sha256.txt \
+    {gcc,clang}/{results,tests.log,benchmark.log,build.log,build/compile_commands.json} sanitizers/tests.log)
+tar -czf "$stage/repeats.tar.gz" -C "$run/repeats" gcc clang
+(cd "$stage" && sha256sum evidence.tar.gz repeats.tar.gz speedups.csv > SHA256SUMS && sha256sum -c SHA256SUMS)
+python3 -c 'import os, sys; os.rename(sys.argv[1], sys.argv[2])' "$stage" "$dest"
+echo "PASS: 108 test executions and 10 benchmark repeats. Archive: $dest"
