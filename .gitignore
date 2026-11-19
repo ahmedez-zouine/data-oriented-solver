@@ -1,10 +1,10 @@
 # ============================================================================
 # Local Agent Memory, Notes & Drafts (STRICTLY LOCAL - DO NOT COMMIT)
 # ============================================================================
+*.pdf
 tmp/
-/tmp/
 *.local.md
-pap*/
+.venv/
 
 # ============================================================================
 # CMake & C++ Build Artifacts
@@ -35,6 +35,8 @@ regression_tests
 *.fdb_latexmk
 *.fls
 *.log
+paper/
+*.zip
 *.out
 *.synctex.gz
 *.toc

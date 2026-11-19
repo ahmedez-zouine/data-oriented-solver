@@ -17,7 +17,7 @@ mkdir -p ubuntu_results/diagnostics build
 echo "[1/4] Capturing LLVM Clang 18 Vectorization & Missed-Loop Diagnostics..."
 clang++ -std=c++17 -O3 -march=native -Wall -Wextra -pthread \
     -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize \
-    -Iinclude src/benchmark_runner.cpp -o build/solver_benchmark_clang \
+    -Iinclude src/benchmark/*.cpp src/hardware/platform_hw_probe.cpp -o build/solver_benchmark_clang \
     2> ubuntu_results/diagnostics/clang18_vectorization_full.txt
 cp ubuntu_results/diagnostics/clang18_vectorization_full.txt \
    ubuntu_results/results_linux_clang_native/vectorization_report.txt 2>/dev/null || true
@@ -25,7 +25,7 @@ cp ubuntu_results/diagnostics/clang18_vectorization_full.txt \
 echo "[2/4] Capturing GNU GCC 13 Optimized & Missed Vectorization Diagnostics..."
 g++ -std=c++17 -O3 -march=native -Wall -Wextra -pthread \
     -fopt-info-vec-optimized -fopt-info-vec-missed \
-    -Iinclude src/benchmark_runner.cpp -o build/solver_benchmark_gcc \
+    -Iinclude src/benchmark/*.cpp src/hardware/platform_hw_probe.cpp -o build/solver_benchmark_gcc \
     2> ubuntu_results/diagnostics/gcc13_vectorization_full.txt
 
 echo "[3/4] Extracting x86_64 AVX-512 & Scalar Strided Assembly (Intel Syntax)..."
@@ -45,7 +45,7 @@ objdump -d -M intel --demangle build/solver_benchmark_gcc \
 echo "[4/4] Running Valgrind Cachegrind (compiled with -mavx2 -mfma -mno-avx512f for Valgrind VEX compatibility)..."
 if command -v valgrind >/dev/null 2>&1; then
     g++ -std=c++17 -O3 -mavx2 -mfma -mno-avx512f -pthread -Iinclude \
-        src/benchmark_runner.cpp -o build/solver_benchmark_avx2
+        src/benchmark/*.cpp src/hardware/platform_hw_probe.cpp -o build/solver_benchmark_avx2
     valgrind --tool=cachegrind --cache-sim=yes \
         --cachegrind-out-file=ubuntu_results/diagnostics/cachegrind.out \
         ./build/solver_benchmark_avx2 > ubuntu_results/diagnostics/cachegrind_stdout.log 2>&1
