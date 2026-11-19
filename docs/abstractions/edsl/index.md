@@ -18,8 +18,9 @@ int main() {
 
 Here the fields allocate their buffers at construction. The fused assignment needs zero intermediate field buffers. The `dsl_fusion` test counts allocations before and after evaluation.
 
-!!! note "Field lifetime and overlap"
-    Keep each source alive until assignment finishes. Field extents must agree. For shifted, overlapping slices, write to a separate destination so that an earlier store cannot overwrite a later input.
+::: info Field lifetime and overlap
+Keep each source alive until assignment finishes. Field extents must agree. For shifted, overlapping slices, write to a separate destination so that an earlier store cannot overwrite a later input.
+:::
 
 
 ## Temporary allocation volume

@@ -1,0 +1,15 @@
+{
+  "name": "data-oriented-solver-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "node tools/docs/assets.mjs && vitepress dev docs",
+    "docs:build": "node tools/docs/assets.mjs && vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "4.3.2",
+    "vitepress": "1.6.4",
+    "vue": "3.5.45"
+  }
+}

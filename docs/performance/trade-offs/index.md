@@ -3,9 +3,9 @@
 
 The Xeon query benchmark reads several properties at scattered indices. At 4M cells, a batch of 50,000 queries takes 1.40 ms with AoS, 2.10 ms with tiled AoSoA and 2.33 ms with SoA. The fastest layout for this query differs from the streaming result above. Panel B uses normalized scores for source and runtime metrics. Its radial distances do not represent milliseconds.
 
-[![Random lookup times by layout and a comparison of five normalized implementation metrics](../assets/fig5_cognitive_tradeoffs.png){ .plot }](../assets/fig5_cognitive_tradeoffs.pdf)
+[![Random lookup times by layout and a comparison of five normalized implementation metrics](/assets/fig5_cognitive_tradeoffs.png)](/assets/fig5_cognitive_tradeoffs.pdf)
 
-[Open the query and maintainability plots as a vector PDF](../assets/fig5_cognitive_tradeoffs.pdf)
+[Open the query and maintainability plots as a vector PDF](/assets/fig5_cognitive_tradeoffs.pdf)
 
 
 ## Interpret a scattered lookup

@@ -11,7 +11,7 @@ $$
 p_{\mathrm{next}} = (1-\omega)c + \omega\left(\tfrac14\sum_{j=1}^{4}p_j - \alpha r\right).
 $$
 
-Choose `Dirichlet{value}` for a prescribed boundary value, `Neumann{}` for a copied edge value, or `Periodic{}` to wrap values across opposite edges. [Complete 3 by 3 example](../getting-started/build.md#run-one-jacobi-sweep)
+Choose `Dirichlet{value}` for a prescribed boundary value, `Neumann{}` for a copied edge value, or `Periodic{}` to wrap values across opposite edges. [Complete 3 by 3 example](/getting-started/build/#run-one-jacobi-sweep)
 
 
 ## Line solver

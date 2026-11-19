@@ -62,3 +62,9 @@ __pycache__/
 
 # Generated documentation
 /site/
+
+# VitePress build inputs and generated assets
+/node_modules/
+/docs/.vitepress/cache/
+/docs/public/assets/
+!/docs/getting-started/build/
