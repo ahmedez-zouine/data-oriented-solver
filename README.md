@@ -128,7 +128,7 @@ This project is licensed under the [MIT License](LICENSE).
 *Visitor activity across multi-architecture computing research hubs*
 
 <a href="https://mapmyvisitors.com/web/1c9kq" target="_blank" rel="noopener">
-  <img src="https://mapmyvisitors.com/map.png?cl=6a7bb5&w=1200&t=tt&d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=3b7c1a" alt="Global Visitors Map" width="700" style="max-width: 100%; height: auto; margin-top: 8px;" />
+  <img src="https://mapmyvisitors.com/map.png?cl=2e3a4f&w=1200&t=tt&d=DgbseS68tbhFmnePsrKjWwI4qLL6DWkohB75KvmvBLo&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=1973d8" alt="Global Visitors Map" width="700" style="max-width: 100%; height: auto; margin-top: 8px;" />
 </a>
 
 </div>
