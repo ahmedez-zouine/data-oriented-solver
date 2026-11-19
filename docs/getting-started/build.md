@@ -4,16 +4,19 @@ title: Prerequisites & Build
 
 # Prerequisites & Build
 
-Building the solver requires only a standard C++17 compiler and CMake 3.20 or later. It depends exclusively on the C++ standard library and the platform thread library (no heavy third-party dependencies required).
+The solver is written in standard **C++17** and requires only **CMake 3.20+** and the C++ standard library. It does not require any external third-party dependencies, making it straightforward to build, test, and integrate into existing simulation pipelines.
 
 ## Compiler Requirements
 
-- **Clang:** 15.0 or later (LLVM Clang or Apple Clang)
-- **GCC:** 11.0 or later
-- **MSVC:** Visual Studio 2022 (v143 toolset) or later
-- **CMake:** 3.20 or later
+| Toolchain | Minimum Supported | Recommended / Tested | Supported SIMD Extensions |
+| :--- | :--- | :--- | :--- |
+| **LLVM Clang** | 15.0+ | 18.1+ | AVX-512, AVX2, ARM64 NEON |
+| **Apple Clang** | 14.0+ (Xcode 14) | 15.0+ (Xcode 15/16) | ARM64 NEON |
+| **GCC** | 11.0+ | 13.2+ | AVX-512, AVX2, SSE4.2 |
+| **MSVC** | VS 2022 (v143) | VS 2022 (17.8+) | AVX2 |
+| **CMake** | 3.20+ | 3.28+ | All platforms |
 
-## Quick Build & Verify
+## Quick Build & Test
 
 === "Linux / macOS"
 
@@ -28,7 +31,7 @@ Building the solver requires only a standard C++17 compiler and CMake 3.20 or la
     # 3. Compile across all CPU cores
     cmake --build build --parallel
 
-    # 4. Verify test suite
+    # 4. Verify test suite (all 36 tests)
     ctest --test-dir build --output-on-failure
     ```
 
@@ -37,31 +40,47 @@ Building the solver requires only a standard C++17 compiler and CMake 3.20 or la
     ```cmd
     git clone https://github.com/ahmedez-zouine/data-oriented-solver.git
     cd data-oriented-solver
+
     cmake -S . -B build
     cmake --build build --config Release --parallel
     ctest --test-dir build -C Release --output-on-failure
     ```
 
-!!! tip "Native SIMD Tuning"
-    By default on Linux and macOS, Release configuration adds `-O3 -march=native` to allow compiler vectorization using the host CPU SIMD instructions (e.g. AVX-512, AVX2, or ARM64 NEON). To build generic portable binaries for distribution, add `-DENABLE_NATIVE_SIMD=OFF` to your `cmake` command.
+=== "Custom Clang / GCC Toolchain"
+
+    ```bash
+    # Explicitly select Clang 18 or GCC 13
+    cmake -S . -B build \
+      -DCMAKE_CXX_COMPILER=clang++-18 \
+      -DCMAKE_BUILD_TYPE=Release
+
+    cmake --build build -j$(nproc)
+    ctest --test-dir build --output-on-failure
+    ```
+
+!!! tip "Native SIMD Vectorization"
+    On Linux and macOS, CMake automatically enables `-O3 -march=native` in Release mode so compilers can generate 512-bit AVX-512 (on Xeon) or 128-bit NEON (on Apple Silicon) vector instructions. To build generic, portable binaries across machines without native host flags, configure with:
+    ```bash
+    cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_NATIVE_SIMD=OFF
+    ```
 
 ## Minimal 2D Jacobi Example
 
-Here is a self-contained 3x3 grid Jacobi update using `SoALayout`:
+The following standalone example demonstrates how to set up a 3x3 grid, initialize source terms, and run a Jacobi sweep using `SoALayout`:
 
 ```cpp
 #include <dos/solvers/jacobi_soa.hpp>
 #include <iostream>
 
 int main() {
-    // 3x3 grid with one-cell boundary halo
+    // Define a 3x3 grid (9 cells including one-cell halo boundaries)
     const dos::GridDimensions grid{3, 3};
     dos::SoALayout cells(grid.size());
 
-    // Initialize interior cell source term
+    // Initialize interior cell source term (cell index 4 is the center cell)
     cells.rhs(4) = 0.0;
 
-    // Run one Jacobi sweep with Dirichlet boundary = 2.0
+    // Run one 5-point Jacobi relaxation sweep with Dirichlet boundary = 2.0
     dos::JacobiSoA{}(cells, grid, {}, dos::Dirichlet{2.0});
 
     std::cout << "Interior pressure at cell (1, 1): " << cells.p(4) << "\n";
@@ -76,12 +95,13 @@ int main() {
     ./build/sweep
     ```
 
-=== "Embedding in CMake"
+=== "CMake Integration"
 
     ```cmake
     cmake_minimum_required(VERSION 3.20)
     project(my_simulation LANGUAGES CXX)
 
+    # Embed data-oriented-solver as a submodule or subdirectory
     add_subdirectory(vendor/data-oriented-solver EXCLUDE_FROM_ALL)
 
     add_executable(my_app main.cpp)
@@ -90,12 +110,12 @@ int main() {
 
 ## Local Documentation Preview
 
-To preview this documentation site locally:
+To preview this documentation site locally with live reloading:
 
 ```bash
-# Install dependencies
+# Install Zensical documentation generator
 python3 -m pip install -r requirements-docs.txt
 
-# Start live reload server
+# Start live preview server (serves on http://127.0.0.1:8000)
 zensical serve
 ```

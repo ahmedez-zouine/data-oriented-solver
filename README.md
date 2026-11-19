@@ -49,7 +49,7 @@ Empirical evaluation across physical hardware architectures (Apple Silicon M1 AR
 
 Engineering trade-offs comparing Object-Oriented Design (AoS), raw Structure-of-Arrays (SoA), and the proposed C++17 Generative eDSL:
 - **(a) Random Multi-Property Query Crossover**: While SoA delivers optimal streaming performance, random multi-property probes at DRAM scale ($N = 4\text{M}$) incur a $1.66\times$ TLB/cache-line scatter penalty ($2.33\text{ ms}$ vs. $1.40\text{ ms}$); tiled **AoSoA** recovers spatial locality ($2.10\text{ ms}$).
-- **(b) Program Comprehension vs. Hardware Efficiency**: 5-axis normalized polar profile evaluating Maintainability Index (MI), Code Conciseness, Mental Effort, Cache Efficiency, and Stencil Speedup—showing that generative expression templates match manual SoA speedup while preserving OOP maintainability.
+- **(b) Program Comprehension vs. Hardware Efficiency**: 5-axis normalized polar profile evaluating Maintainability Index (MI), Code Conciseness, Mental Effort, Cache Efficiency, and Stencil Speedup (showing that generative expression templates match manual SoA speedup while preserving OOP maintainability).
 
 ---
 

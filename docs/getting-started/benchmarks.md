@@ -4,21 +4,27 @@ title: Tests & Benchmarks
 
 # Tests & Benchmarks
 
-## Running the Automated Test Suite
+The project includes an automated test suite of 36 unit tests and a multi-workload benchmark harness that measures stencil sweeps, expression-template loop fusion, multi-threading scaling, and scattered cell lookups.
+
+## Automated Test Suite
+
+Run the full test suite using CTest:
 
 ```bash
 ctest --test-dir build --output-on-failure
 ```
 
-The test suite executes **36 automated tests**:
+The 36 automated tests cover five core functional domains:
 
-- **32 regression tests** checking solver stability across layouts and boundary conditions.
-- **`units`**: compile-time dimensional arithmetic and zero-size-overhead checks.
-- **`layouts`**: byte footprint, alignment, and hot/cold split assertions.
-- **`dsl_fusion`**: allocator instrumentation verifying zero temporary heap allocations during fused expression evaluation.
-- **`jacobi_2d`**: cross-layout numerical equivalence across six grid widths using an absolute tolerance of `1e-12`.
+| Test Group | Tests | Description |
+| :--- | :---: | :--- |
+| **`units`** | 1 | Verifies compile-time dimensional exponents and asserts `sizeof(Quantity) == sizeof(double)`. |
+| **`layouts`** | 1 | Asserts exact byte sizes, 64-byte alignment boundaries, and hot/cold field partitioning. |
+| **`dsl_fusion`** | 1 | Instruments global heap allocations to verify **zero temporary allocations** during expression evaluation. |
+| **`jacobi_2d`** | 1 | Validates cross-layout numerical equivalence between AoS, SoA, and AoSoA across 6 grid sizes ($10^{-12}$ tolerance). |
+| **Regression Suite** | 32 | Exercises line solvers, Dirichlet/Neumann/Periodic boundary conditions, and edge-case domain dimensions. |
 
-To inspect the 2D Jacobi test individually:
+To run an individual test with verbose diagnostics:
 
 ```bash
 ctest --test-dir build -R '^jacobi_2d$' -V
@@ -26,25 +32,51 @@ ctest --test-dir build -R '^jacobi_2d$' -V
 
 ## Running the Benchmark Harness
 
-Running `./build/solver_benchmark` from the repository root executes every benchmark suite and writes CSV output files into the current working directory. To isolate outputs in a clean directory:
+The compiled benchmark binary `./build/solver_benchmark` executes performance sweeps and records timings in CSV format.
+
+### Quick Smoke Test
+
+For rapid local testing during development, pass `--quick`:
 
 ```bash
 mkdir -p build/results
 (cd build/results && ../solver_benchmark --suite all --quick)
 ```
 
-!!! note "Problem sizes"
-    The `--quick` mode runs smaller grids starting at 4,096 cells for fast smoke testing. Omit `--quick` to run the full scale sweep from 16,384 up to 4,194,304 cells. On Windows multi-config builds, invoke `..\Release\solver_benchmark.exe` from `build\results`.
+The `--quick` flag runs smaller grids (starting at 4,096 cells) to finish in seconds.
 
-## Individual Benchmark Suites
+### Full Empirical Sweep
 
-Select a specific workload with `--suite NAME`. Each invocation also emits `platform_profile.json` recording CPU model, compiler version, SIMD width, and cache hierarchy metadata.
+To reproduce full-scale benchmark measurements (from 16,384 up to 4,194,304 cells):
 
-| Suite Name | Workload Description | Output File |
-| :--- | :--- | :--- |
-| `grid` | 1D line stencils and scattered random cell queries | `benchmark_results.csv` |
-| `grid2d` | 2D five-point Jacobi sweeps across layouts | `jacobi_2d.csv` |
-| `dsl` | Eager temporary vectors vs. fused expression templates | `dsl_benchmark.csv` |
-| `multicore` | Multi-threaded scaling across physical cores | `multicore_benchmark.csv` |
+```bash
+mkdir -p build/results
+(cd build/results && ../solver_benchmark --suite all)
+```
 
-When comparing machines or compiler versions, archive `platform_profile.json` alongside the generated CSV tables.
+## Benchmark Suites & Output Artifacts
+
+| Suite Name | Workload Description | Output CSV | Key Metrics Recorded |
+| :--- | :--- | :--- | :--- |
+| `grid` | 1D line stencils and scattered random cell queries | `benchmark_results.csv` | Sweeps/sec, execution time (ms), bandwidth (GB/s) |
+| `grid2d` | 2D 5-point Jacobi relaxation across AoS, SoA, AoSoA | `jacobi_2d.csv` | Grid width, cell count, time per sweep, layout speedup |
+| `dsl` | Eager temporary vectors vs. fused expression templates | `dsl_benchmark.csv` | Evaluation time (ms), allocated heap bytes avoided |
+| `multicore` | OpenMP / thread-pool scaling across physical CPU cores | `multicore_benchmark.csv` | Core count, parallel speedup, thread efficiency |
+
+### Hardware Profile Capture
+
+Every benchmark execution automatically generates `platform_profile.json` in the active working directory:
+
+```json
+{
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+  "simd_bits": 512,
+  "l1_cache_bytes": 49152,
+  "l2_cache_bytes": 1310720,
+  "l3_cache_bytes": 50331648,
+  "compiler": "Clang 18.1.3",
+  "stream_copy_bandwidth_gbps": 42.8
+}
+```
+
+This ensures full reproducibility when sharing or comparing benchmark data across different machines.

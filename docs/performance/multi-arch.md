@@ -2,32 +2,65 @@
 title: Multi-Arch Scaling
 ---
 
-# Multi-Architecture Scaling
+# Multi-Architecture Performance Scaling
 
-Empirical measurements compare Jacobi stencil sweeps and expression-template evaluation across **Apple Silicon M1 (ARM64 128-bit NEON)** and **Intel Xeon Platinum 8370C (x86_64 AVX-512)** using Clang 18 and GCC 13.
+To understand how memory layout and vectorization behave across different CPU designs, the solver was benchmarked across two distinct architectures:
+- **Intel Xeon Platinum 8370C (x86_64):** 2.80 GHz base frequency, **512-bit AVX-512** vector registers, 48 KB L1d cache, 1.25 MB L2 cache, 48 MB shared L3 cache, running Ubuntu Linux with Clang 18 and GCC 13.
+- **Apple Silicon M1 (ARM64):** 3.20 GHz Firestorm cores, **128-bit ARM64 NEON** vector registers, 128 KB L1d cache, 12 MB shared L2 cache, running macOS with Apple Clang.
 
 <div class="dos-figure-frame">
   <a href="../../assets/fig7_multi_arch_comparison.pdf">
     <img src="../../assets/fig7_multi_arch_comparison.png" alt="Multi-architecture scaling across Apple M1 NEON and Intel Xeon AVX-512" />
   </a>
   <div class="dos-figure-caption">
-    Multi-regime stencil speedups, eDSL loop-fusion scaling, and Xeon SIMD factor decomposition.
+    Figure 1: (a) 2D Jacobi stencil speedup across grid scales; (b) eDSL loop-fusion speedup over eager vector temporaries; (c) AVX-512 vectorization factor decomposition on Intel Xeon.
     <a href="../../assets/fig7_multi_arch_comparison.pdf">Open high-resolution vector PDF &rarr;</a>
   </div>
 </div>
 
-## Cache Hierarchy & Vectorization Breakdown
+## Stencil Speedup Across Memory Regimes
 
-Grid scales span five sizes from $16{,}384$ to $4{,}194{,}304$ cells:
+Grid scales span five orders of magnitude, from $16{,}384$ cells up to $4{,}194{,}304$ cells:
 
-- **L1/L2 Cache Fit (16K cells):** Clang 18 with AVX-512 reaches **17.88x** over AoS, while GCC 13 reaches **7.78x** with AVX-512 and **5.58x** with SSE4.2 (128-bit).
-- **Apple M1 12 MB L2 Transition (256K cells):** At $262{,}144$ cells, the five SoA hot fields occupy **10 MiB** (fitting inside L2), whereas AoS records occupy **28 MiB** (spilling to DRAM), producing a **1.36x** speedup peak on M1.
-- **DRAM Bandwidth Regime (4M cells):** Xeon Clang 18 sustains **6.11x** and GCC 13 sustains **5.29x** over AoS.
+| Grid Size ($N$) | Hot SoA Footprint | AoS Record Footprint | Xeon Clang 18 (AVX-512) | Xeon GCC 13 (AVX-512) | Apple M1 (NEON) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **16,384** | 0.6 MiB (in L2) | 1.75 MiB (in L3) | **17.88x** | 7.78x | 1.14x |
+| **65,536** | 2.5 MiB (in L3) | 7.0 MiB (in L3) | **12.14x** | 6.82x | 1.20x |
+| **262,144** | 10.0 MiB (in L3/M1 L2) | 28.0 MiB (overflows M1 L2) | **8.45x** | 5.94x | **1.36x (peak)** |
+| **1,048,576** | 40.0 MiB (in L3) | 112.0 MiB (DRAM) | **7.02x** | 5.51x | 1.24x |
+| **4,194,304** | 160.0 MiB (DRAM) | 448.0 MiB (DRAM) | **6.11x** | **5.29x** | 1.18x |
 
-| Intel Xeon Configuration (SoA Jacobi over AoS) | 16,384 cells | 4,194,304 cells |
-| :--- | :---: | :---: |
-| **Clang 18 (AVX-512, unrolled)** | **17.88x** | **6.11x** |
-| **GCC 13 (AVX-512, 512-bit)** | **7.78x** | **5.29x** |
-| **GCC 13 (SSE4.2, 128-bit layout baseline)** | **5.58x** | **5.06x** |
+### 1. The L1/L2 Cache-Resident Regime (16K Cells)
 
-In Panel (b), the **16.09x** peak eDSL speedup at 4M cells compares fused expression evaluation against eager OOP field operators that allocate 224 MiB of temporary heap buffers. See [Expression Template eDSL](../abstractions/edsl.md) for details.
+When the entire problem fits inside on-chip cache:
+- Clang 18 with AVX-512 reaches a peak speedup of **17.88x** over AoS.
+- By unrolling loops 4-way and loading 8 doubles per instruction into 512-bit `zmm` registers, Clang keeps CPU execution ports saturated.
+- AoS suffers because non-contiguous memory access forces scalar gathers or serial unpacking steps that stall the instruction pipeline.
+
+### 2. The Apple M1 L2 Cache Transition Cliff (256K Cells)
+
+The Apple Silicon M1 features a massive **12 MB shared L2 cache**:
+- At $N = 262{,}144$ cells, the five hot fields of `SoALayout` occupy **10 MiB**, fitting entirely within the 12 MB L2 cache.
+- The corresponding `AoSLayout` requires **28 MiB**, spilling out of cache and forcing traffic over the unified memory bus.
+- This creates a distinct speedup peak of **1.36x** at 256K cells on M1, illustrating how layout compaction directly extends on-chip cache residency.
+
+### 3. The DRAM Bandwidth-Bound Regime (4M Cells)
+
+At $N = 4{,}194{,}304$ cells, both layouts exceed L3 cache capacity and are bound by DRAM bandwidth:
+- Xeon Clang 18 sustains **6.11x** and GCC 13 sustains **5.29x** over AoS.
+- This sustained speedup closely mirrors the **64.3% reduction in memory bus traffic** (moving 160 MiB versus 448 MiB per sweep).
+
+## eDSL Loop-Fusion Scaling (Panel b)
+
+Evaluating the mathematical expression $0.5u + 0.3v - 0.1p + 0.05\text{rhs}$:
+- **Eager OOP operators:** Allocate 7 temporary vectors (224 MiB of memory traffic at 4M cells).
+- **Fused eDSL:** Fuses the entire expression into a single loop pass without allocations.
+- As problem size grows and temporaries exceed cache sizes, the eDSL speedup scales from **3.1x** at 16K cells up to **16.09x** at 4M cells.
+
+## Vectorization Decomposition (Panel c)
+
+Decomposing execution on Intel Xeon reveals the contributions of layout contiguity and vector register width:
+- Switching from AoS to SoA without SIMD (scalar execution) yields a **1.8x** improvement from cache line efficiency alone.
+- Adding 128-bit vectorization (SSE4.2, 2 doubles) raises speedup to **5.06x**.
+- Adding 256-bit vectorization (AVX2, 4 doubles) raises speedup to **5.18x**.
+- Adding 512-bit vectorization (AVX-512, 8 doubles) delivers the full **6.11x** DRAM speedup and **17.88x** cache speedup.
