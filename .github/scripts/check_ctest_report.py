@@ -1,9 +1,7 @@
-"""Run CTest and check each required case against its JUnit result."""
+"""Check the required cases in a CTest JUnit report."""
 import argparse
 import os
 from pathlib import Path
-import subprocess
-import tempfile
 import xml.etree.ElementTree as ET
 
 REGRESSIONS = {f"RegressionTest_{i}" for i in range(1, 33)}
@@ -12,16 +10,11 @@ FOCUSED = {"units", "layouts", "dsl_fusion", "jacobi_2d"}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("build", type=Path)
-    parser.add_argument("config", choices=("Debug", "Release"))
+    parser.add_argument("report", type=Path)
     args = parser.parse_args()
-    with tempfile.TemporaryDirectory() as directory:
-        report = Path(directory).resolve() / "ctest.xml"
-        run = subprocess.run(["ctest", "-C", args.config, "--output-on-failure",
-                              "--output-junit", str(report)], cwd=args.build)
-        if not report.is_file():
-            raise SystemExit("CTest did not produce its JUnit report.")
-        cases = ET.parse(report).findall(".//testcase")
+    if not args.report.is_file():
+        parser.error(f"Missing CTest JUnit report: {args.report}")
+    cases = ET.parse(args.report).findall(".//testcase")
 
     passed = {case.attrib["name"] for case in cases
               if case.get("status") == "run"
@@ -41,7 +34,7 @@ def main():
     if "GITHUB_STEP_SUMMARY" in os.environ:
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as output:
             output.write(message)
-    return run.returncode or int(bool(missing) or len(passed) != len(cases))
+    return int(bool(missing) or len(passed) != len(cases))
 
 
 if __name__ == "__main__":

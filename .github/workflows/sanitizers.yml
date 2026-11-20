@@ -39,7 +39,12 @@ jobs:
         run: cmake --build build-san --parallel
 
       - name: Run CTest under ASan and UBSan
-        run: python3 .github/scripts/run_ctest.py build-san Debug
+        id: ctest
+        run: ctest --test-dir build-san -C Debug --output-on-failure --output-junit ctest-results.xml
+
+      - name: Verify required test results
+        if: ${{ !cancelled() && steps.ctest.outcome != 'skipped' }}
+        run: python3 .github/scripts/check_ctest_report.py build-san/ctest-results.xml
 
       - name: Exercise the benchmark under sanitizers
         working-directory: build-san

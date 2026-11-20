@@ -10,6 +10,7 @@ on:
       - 'tools/docs/**'
       - 'zensical.toml'
       - 'mkdocs.yml'
+      - 'requirements-docs.in'
       - 'requirements-docs.txt'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
@@ -36,9 +37,8 @@ jobs:
           cache-dependency-path: requirements-docs.txt
 
       - name: Install Zensical
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-docs.txt
+        run: >-
+          python -m pip install --only-binary :all: --require-hashes -r requirements-docs.txt
 
       - name: Sync documentation assets
         run: python tools/docs/sync_assets.py

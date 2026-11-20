@@ -42,7 +42,12 @@ jobs:
         run: cmake --build build/sonar --parallel 2
 
       - name: Run all required CTest cases
-        run: python3 .github/scripts/run_ctest.py build/sonar Debug
+        id: ctest
+        run: ctest --test-dir build/sonar -C Debug --output-on-failure --output-junit ctest-results.xml
+
+      - name: Verify required test results
+        if: ${{ !cancelled() && steps.ctest.outcome != 'skipped' }}
+        run: python3 .github/scripts/check_ctest_report.py build/sonar/ctest-results.xml
 
       - name: Generate C++ line and branch coverage
         run: |
