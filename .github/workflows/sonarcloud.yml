@@ -1,0 +1,61 @@
+name: SonarCloud Code Analysis
+
+on:
+  push:
+    branches: [Master, main]
+  pull_request:
+    branches: [Master, main]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonarcloud-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: C++17 analysis and tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source with full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Configure coverage build
+        run: >-
+          cmake -S . -B build/sonar
+          -DCMAKE_CXX_COMPILER=g++-13
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_FLAGS=--coverage
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          -DENABLE_NATIVE_SIMD=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build the solver and tests
+        run: cmake --build build/sonar --parallel 2
+
+      - name: Run all required CTest cases
+        run: python3 .github/scripts/run_ctest.py build/sonar Debug
+
+      - name: Generate C++ line and branch coverage
+        run: |
+          python3 -m venv "$RUNNER_TEMP/gcovr"
+          "$RUNNER_TEMP/gcovr/bin/pip" install gcovr==8.4
+          "$RUNNER_TEMP/gcovr/bin/gcovr" --gcov-executable gcov-13 --root . \
+            --filter '^include/' --filter '^src/' --print-summary \
+            --sonarqube build/sonar/coverage.xml build/sonar
+
+      - name: Analyze C++ and wait for the quality gate
+        if: >-
+          github.actor != 'dependabot[bot]' &&
+          (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        uses: SonarSource/sonarqube-scan-action@v8.5.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
