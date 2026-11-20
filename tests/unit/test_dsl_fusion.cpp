@@ -25,6 +25,10 @@ void operator delete(void* p, std::align_val_t) noexcept {
     if (p) ::operator delete(static_cast<void**>(p)[-1]);
 }
 
+void operator delete(void* p, std::size_t, std::align_val_t alignment) noexcept {
+    ::operator delete(p, alignment);
+}
+
 int main() {
     using namespace dos;
     AlignedField u_east(19, 1), u_west(19, 2), u_north(19, 3), u_south(19, 4), rhs(19, 0.5), p_next(19);

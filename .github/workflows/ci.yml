@@ -65,4 +65,9 @@ jobs:
         run: cmake --build build --config ${{ matrix.build_type }} --parallel
 
       - name: Run CTest and verify required cases
-        run: python .github/scripts/run_ctest.py build ${{ matrix.build_type }}
+        id: ctest
+        run: ctest --test-dir build -C ${{ matrix.build_type }} --output-on-failure --output-junit ctest-results.xml
+
+      - name: Verify required test results
+        if: ${{ !cancelled() && steps.ctest.outcome != 'skipped' }}
+        run: python .github/scripts/check_ctest_report.py build/ctest-results.xml

@@ -35,7 +35,7 @@ The job summary counts passes in 2 groups. The first contains `RegressionTest_1`
 | `dsl_fusion` | Fused expression values, allocation counts and mismatched field lengths. |
 | `jacobi_2d` | Three boundary policies across six grid widths, with a tolerance of 1e-12 for layout agreement. |
 
-CI reads CTest's JUnit report and checks each required name. A missing, skipped or failing required test appears by name in the summary. New cases run automatically. To make a new case mandatory, add its name to the [CTest runner](scripts/run_ctest.py).
+CI reads CTest's JUnit report and checks each required name. A missing, skipped or failing required test appears by name in the summary. New cases run automatically. To make a new case mandatory, add its name to the [report checker](scripts/check_ctest_report.py).
 
 ## Reproduce a failure
 
@@ -44,7 +44,8 @@ From the repository root, use Python 3 and CTest 3.21 or later to reproduce the 
 ```sh
 cmake -S . -B build/ci-local -DCMAKE_BUILD_TYPE=Release
 cmake --build build/ci-local --config Release --parallel
-python3 .github/scripts/run_ctest.py build/ci-local Release
+ctest --test-dir build/ci-local -C Release --output-on-failure --output-junit ctest-results.xml
+python3 .github/scripts/check_ctest_report.py build/ci-local/ctest-results.xml
 ```
 
 If the job stops during compilation, open the first failing build step. If CTest reports a failure, rerun that case with verbose output. For example, to inspect the 2D stencil test, run `ctest --test-dir build/ci-local -C Release -R '^jacobi_2d$' -V`.
@@ -69,7 +70,8 @@ cmake -S . -B build/ci-san -DCMAKE_CXX_COMPILER=clang++ \
 cmake --build build/ci-san --parallel
 export ASAN_OPTIONS=detect_leaks=1:halt_on_error=1
 export UBSAN_OPTIONS=print_stacktrace=1:halt_on_error=1
-python3 .github/scripts/run_ctest.py build/ci-san Debug
+ctest --test-dir build/ci-san -C Debug --output-on-failure --output-junit ctest-results.xml
+python3 .github/scripts/check_ctest_report.py build/ci-san/ctest-results.xml
 (cd build/ci-san && ./solver_benchmark --quick)
 ```
 
