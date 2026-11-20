@@ -41,13 +41,26 @@ jobs:
       - name: Build the solver and tests
         run: cmake --build build/sonar --parallel 2
 
+      - name: Install Python coverage reporter
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y python3-coverage
+
       - name: Run all required CTest cases
         id: ctest
         run: ctest --test-dir build/sonar -C Debug --output-on-failure --output-junit ctest-results.xml
 
       - name: Verify required test results
         if: ${{ !cancelled() && steps.ctest.outcome != 'skipped' }}
-        run: python3 .github/scripts/check_ctest_report.py build/sonar/ctest-results.xml
+        env:
+          COVERAGE_FILE: build/sonar/.coverage
+        run: |
+          /usr/bin/python3 -m coverage run .github/scripts/check_ctest_report.py build/sonar/ctest-results.xml
+          /usr/bin/python3 -m coverage xml -o build/sonar/python-coverage.xml
+
+      - name: Exercise the instrumented random query loops
+        working-directory: build/sonar
+        run: ./solver_benchmark --suite grid --quick
 
       - name: Generate C++ line and branch coverage
         run: |
