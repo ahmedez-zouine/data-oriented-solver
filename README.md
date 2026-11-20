@@ -9,6 +9,7 @@
 [![Standard](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-0284c7.svg)](https://ahmedez-zouine.github.io/data-oriented-solver/)
+[![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ahmedez-zouine_data-oriented-solver&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ahmedez-zouine_data-oriented-solver)
 
 A high-performance C++17 scientific computing and benchmarking framework designed to evaluate the cache performance, memory footprint, and compiler auto-vectorization of **Data-Oriented Design (DoD)** versus traditional **Object-Oriented Design (AoS)**.
 
@@ -27,6 +28,7 @@ Select a badge to open its workflow runs. The badges show the status of `Master`
 | [![C++17 public API](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/public-api.yml?query=branch%3AMaster) | Each public header compiles on its own. A separate CMake application links the solver and runs a Jacobi step. |
 | [![Benchmark smoke checks](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/benchmarks.yml?query=branch%3AMaster) | A quick run writes 4 result tables and a hardware profile. |
 | [![Documentation](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/docs.yml?query=branch%3AMaster) | Builds the documentation with Zensical and deploys it to GitHub Pages. |
+| [![SonarCloud Code Analysis](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sonarcloud.yml/badge.svg?branch=Master)](https://github.com/ahmedez-zouine/data-oriented-solver/actions/workflows/sonarcloud.yml?query=branch%3AMaster) | Runs 36 CTest cases and sends GCC coverage and C++ analysis to the quality gate on trusted builds. |
 
 ## Key Features
 

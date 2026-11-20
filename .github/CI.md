@@ -1,11 +1,12 @@
 # Continuous integration
 
-Each pull request to `Master` or `main` starts 11 jobs. Pushes to either branch run the same checks. To repeat a check on a branch, select its workflow under **Actions**, then choose **Run workflow**.
+Each pull request to `Master` or `main` starts 12 jobs. Pushes to either branch run the same checks. To repeat a check on a branch, select its workflow under **Actions**, then choose **Run workflow**.
 
 | Workflow | Configurations | What a pass tells the reviewer |
 | --- | --- | --- |
 | [Build and CTest](workflows/ci.yml) | Ubuntu GCC Release and Debug, Ubuntu Clang Release, macOS AppleClang Release, Windows MSVC Release | The C++17 targets build and each of the 36 required tests passes. |
 | [Sanitizers](workflows/sanitizers.yml) | Ubuntu Clang Debug | All 36 cases and the quick benchmark complete with address, leak and undefined behavior checks enabled. |
+| [SonarCloud Code Analysis](workflows/sonarcloud.yml) | Ubuntu 24.04, GCC 13, Debug | Checks 36 tests, exports line and branch coverage and waits for the SonarCloud quality gate on trusted builds. |
 | [Benchmark smoke checks](workflows/benchmarks.yml) | Ubuntu GCC, Ubuntu Clang, macOS AppleClang | The quick run produces a data row in each of 4 CSV tables and a readable JSON profile with a CPU architecture. |
 | [C++17 public API](workflows/public-api.yml) | Ubuntu GCC and Clang | Each public header compiles as the only include in a translation unit. A separate application links `dos::solvers` and `dos::dsl` and checks one Jacobi update. |
 
@@ -47,6 +48,17 @@ python3 .github/scripts/run_ctest.py build/ci-local Release
 ```
 
 If the job stops during compilation, open the first failing build step. If CTest reports a failure, rerun that case with verbose output. For example, to inspect the 2D stencil test, run `ctest --test-dir build/ci-local -C Release -R '^jacobi_2d$' -V`.
+
+## SonarCloud setup
+
+1. Import this GitHub repository into SonarQube Cloud. Choose CI-based analysis and turn off automatic analysis if enabled.
+2. Match the organization and project keys in [the scanner configuration](../sonar-project.properties) to the imported project. If the project key differs, update the README quality gate badge too.
+3. Create a token with Execute Analysis permission and save it as `SONAR_TOKEN` in GitHub under **Settings > Secrets and variables > Actions**.
+4. Run **SonarCloud Code Analysis** on `Master` to establish the baseline before reviewing pull request results.
+
+CMake exports the compiler commands during configuration. GCC records execution counts during CTest. gcovr 8.4 exports coverage for `include/` and `src/`, including compiled benchmark code with zero executions. Only the final scan step receives the token. Fork pull requests and Dependabot runs build and check coverage locally on the runner and skip the upload.
+
+## Reproduce the sanitizer check
 
 To reproduce the sanitizer job on Ubuntu, use a separate build directory.
 
