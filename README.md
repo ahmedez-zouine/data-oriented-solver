@@ -9,7 +9,7 @@
 [![Standard](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-0284c7.svg)](https://ahmedez-zouine.github.io/data-oriented-solver/)
-[![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ahmedez-zouine_data-oriented-solver&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ahmedez-zouine_data-oriented-solver)
+[![SonarCloud Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ahmedez-zouine_data-oriented-solver&metric=alert_status)](https://sonarcloud.io/project/overview?id=ahmedez-zouine_data-oriented-solver)
 
 A high-performance C++17 scientific computing and benchmarking framework designed to evaluate the cache performance, memory footprint, and compiler auto-vectorization of **Data-Oriented Design (DoD)** versus traditional **Object-Oriented Design (AoS)**.
 
